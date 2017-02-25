@@ -1,0 +1,31 @@
+<launch>
+
+  <node
+    pkg="turtlesim"
+    type="turtlesim_node"
+    name="turtlesim"
+    respawn="true"
+  />
+
+  <node
+    pkg="simple"
+    type="drawsquare"
+    name="drawsquare"
+    respawn="true"
+  />
+
+  <node
+    pkg="simple"
+    type="printcolor"
+    name="printcolor"
+    respawn="true"
+  />
+
+  <node
+    pkg="simple"
+    type="chatter"
+    name="chatter"
+    respawn="true"
+  />
+
+</launch>

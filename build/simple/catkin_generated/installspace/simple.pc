@@ -1,0 +1,8 @@
+prefix=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/install
+
+Name: simple
+Description: Description of simple
+Version: 0.0.0
+Cflags: 
+Libs: -L/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/install/lib 
+Requires: 

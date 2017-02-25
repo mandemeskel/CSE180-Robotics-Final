@@ -1,0 +1,17 @@
+<launch>
+
+  <node
+    pkg="turtlesim"
+    type="turtlesim_node"
+    name="turtlesim"
+    respawn="true"
+  />
+
+  <node
+    pkg="simple"
+    type="moveongrid"
+    name="moveongrid"
+    respawn="true"
+  />
+
+</launch>

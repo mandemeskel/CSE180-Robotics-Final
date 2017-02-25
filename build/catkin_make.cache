@@ -1,0 +1,2 @@
+simple
+-DCATKIN_DEVEL_PREFIX=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/devel -DCMAKE_INSTALL_PREFIX=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/install -G Unix Makefiles
