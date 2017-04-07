@@ -344,6 +344,12 @@ cmake_modules_DIR:PATH=/opt/ros/indigo/share/cmake_modules/cmake
 //The directory containing a CMake configuration file for cpp_common.
 cpp_common_DIR:PATH=/opt/ros/indigo/share/cpp_common/cmake
 
+//Value Computed by CMake
+cse180final_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/cse180final
+
+//Value Computed by CMake
+cse180final_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/cse180final
+
 //The directory containing a CMake configuration file for cv_bridge.
 cv_bridge_DIR:PATH=/opt/ros/indigo/share/cv_bridge/cmake
 
@@ -522,11 +528,65 @@ gtest_force_shared_crt:BOOL=OFF
 //Dependencies for the target
 gtest_main_LIB_DEPENDS:STATIC=general;-lpthread;general;gtest;
 
+//Value Computed by CMake
+husky_control_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_control
+
+//Value Computed by CMake
+husky_control_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_control
+
+//Value Computed by CMake
+husky_description_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_description
+
+//Value Computed by CMake
+husky_description_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_description
+
+//Value Computed by CMake
+husky_desktop_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_desktop
+
+//Value Computed by CMake
+husky_desktop_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_desktop
+
+//Value Computed by CMake
+husky_gazebo_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_gazebo
+
+//Value Computed by CMake
+husky_gazebo_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_gazebo
+
+//Value Computed by CMake
+husky_msgs_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_msgs
+
+//Value Computed by CMake
+husky_msgs_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_msgs
+
+//Value Computed by CMake
+husky_navigation_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_navigation
+
+//Value Computed by CMake
+husky_navigation_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_navigation
+
+//Value Computed by CMake
+husky_simulator_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_simulator
+
+//Value Computed by CMake
+husky_simulator_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_simulator
+
+//Value Computed by CMake
+husky_ur5_moveit_config_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_ur5_moveit_config
+
+//Value Computed by CMake
+husky_ur5_moveit_config_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_ur5_moveit_config
+
+//Value Computed by CMake
+husky_viz_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_viz
+
+//Value Computed by CMake
+husky_viz_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/husky_packages/husky_viz
+
 //The directory containing a CMake configuration file for image_transport.
 image_transport_DIR:PATH=/opt/ros/indigo/share/image_transport/cmake
 
 //Path to a library.
-lib:FILEPATH=/opt/ros/indigo/lib/libxmlrpcpp.so
+lib:FILEPATH=/opt/ros/indigo/lib/libactionlib.so
 
 //The directory containing a CMake configuration file for message_filters.
 message_filters_DIR:PATH=/opt/ros/indigo/share/message_filters/cmake
@@ -573,6 +633,9 @@ rosgraph_DIR:PATH=/opt/ros/indigo/share/rosgraph/cmake
 //The directory containing a CMake configuration file for rosgraph_msgs.
 rosgraph_msgs_DIR:PATH=/opt/ros/indigo/share/rosgraph_msgs/cmake
 
+//The directory containing a CMake configuration file for roslaunch.
+roslaunch_DIR:PATH=/opt/ros/indigo/share/roslaunch/cmake
+
 //The directory containing a CMake configuration file for roslib.
 roslib_DIR:PATH=/opt/ros/indigo/share/roslib/cmake
 
@@ -602,6 +665,12 @@ std_msgs_DIR:PATH=/opt/ros/indigo/share/std_msgs/cmake
 
 //The directory containing a CMake configuration file for std_srvs.
 std_srvs_DIR:PATH=/opt/ros/indigo/share/std_srvs/cmake
+
+//Value Computed by CMake
+teleop_twist_keyboard_BINARY_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/teleop_twist_keyboard
+
+//Value Computed by CMake
+teleop_twist_keyboard_SOURCE_DIR:STATIC=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/src/teleop_twist_keyboard
 
 //The directory containing a CMake configuration file for tf2.
 tf2_DIR:PATH=/opt/ros/indigo/share/tf2/cmake
@@ -742,7 +811,7 @@ CMAKE_MODULE_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_NM
 CMAKE_NM-ADVANCED:INTERNAL=1
 //number of local generators
-CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=3
+CMAKE_NUMBER_OF_LOCAL_GENERATORS:INTERNAL=14
 //ADVANCED property for variable: CMAKE_OBJCOPY
 CMAKE_OBJCOPY-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_OBJDUMP

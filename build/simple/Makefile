@@ -150,46 +150,130 @@ depend:
 .PHONY : depend
 
 # Convenience name for target.
-simple/CMakeFiles/followplan.dir/rule:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/followplan.dir/rule
-.PHONY : simple/CMakeFiles/followplan.dir/rule
+simple/CMakeFiles/actionlib_generate_messages_cpp.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+.PHONY : simple/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
 
 # Convenience name for target.
-followplan: simple/CMakeFiles/followplan.dir/rule
-.PHONY : followplan
+actionlib_generate_messages_cpp: simple/CMakeFiles/actionlib_generate_messages_cpp.dir/rule
+.PHONY : actionlib_generate_messages_cpp
 
 # fast build rule for target.
-followplan/fast:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/followplan.dir/build.make simple/CMakeFiles/followplan.dir/build
-.PHONY : followplan/fast
+actionlib_generate_messages_cpp/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/actionlib_generate_messages_cpp.dir/build.make simple/CMakeFiles/actionlib_generate_messages_cpp.dir/build
+.PHONY : actionlib_generate_messages_cpp/fast
 
 # Convenience name for target.
-simple/CMakeFiles/move_around.dir/rule:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/move_around.dir/rule
-.PHONY : simple/CMakeFiles/move_around.dir/rule
+simple/CMakeFiles/actionlib_generate_messages_lisp.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+.PHONY : simple/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
 
 # Convenience name for target.
-move_around: simple/CMakeFiles/move_around.dir/rule
-.PHONY : move_around
+actionlib_generate_messages_lisp: simple/CMakeFiles/actionlib_generate_messages_lisp.dir/rule
+.PHONY : actionlib_generate_messages_lisp
 
 # fast build rule for target.
-move_around/fast:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/move_around.dir/build.make simple/CMakeFiles/move_around.dir/build
-.PHONY : move_around/fast
+actionlib_generate_messages_lisp/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/actionlib_generate_messages_lisp.dir/build.make simple/CMakeFiles/actionlib_generate_messages_lisp.dir/build
+.PHONY : actionlib_generate_messages_lisp/fast
 
 # Convenience name for target.
-simple/CMakeFiles/moveongrid.dir/rule:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/moveongrid.dir/rule
-.PHONY : simple/CMakeFiles/moveongrid.dir/rule
+simple/CMakeFiles/actionlib_generate_messages_py.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/actionlib_generate_messages_py.dir/rule
+.PHONY : simple/CMakeFiles/actionlib_generate_messages_py.dir/rule
 
 # Convenience name for target.
-moveongrid: simple/CMakeFiles/moveongrid.dir/rule
-.PHONY : moveongrid
+actionlib_generate_messages_py: simple/CMakeFiles/actionlib_generate_messages_py.dir/rule
+.PHONY : actionlib_generate_messages_py
 
 # fast build rule for target.
-moveongrid/fast:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/moveongrid.dir/build.make simple/CMakeFiles/moveongrid.dir/build
-.PHONY : moveongrid/fast
+actionlib_generate_messages_py/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/actionlib_generate_messages_py.dir/build.make simple/CMakeFiles/actionlib_generate_messages_py.dir/build
+.PHONY : actionlib_generate_messages_py/fast
+
+# Convenience name for target.
+simple/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+.PHONY : simple/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_cpp: simple/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/rule
+.PHONY : actionlib_msgs_generate_messages_cpp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_cpp/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build.make simple/CMakeFiles/actionlib_msgs_generate_messages_cpp.dir/build
+.PHONY : actionlib_msgs_generate_messages_cpp/fast
+
+# Convenience name for target.
+simple/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+.PHONY : simple/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_lisp: simple/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/rule
+.PHONY : actionlib_msgs_generate_messages_lisp
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_lisp/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build.make simple/CMakeFiles/actionlib_msgs_generate_messages_lisp.dir/build
+.PHONY : actionlib_msgs_generate_messages_lisp/fast
+
+# Convenience name for target.
+simple/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+.PHONY : simple/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+
+# Convenience name for target.
+actionlib_msgs_generate_messages_py: simple/CMakeFiles/actionlib_msgs_generate_messages_py.dir/rule
+.PHONY : actionlib_msgs_generate_messages_py
+
+# fast build rule for target.
+actionlib_msgs_generate_messages_py/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build.make simple/CMakeFiles/actionlib_msgs_generate_messages_py.dir/build
+.PHONY : actionlib_msgs_generate_messages_py/fast
+
+# Convenience name for target.
+simple/CMakeFiles/eigens.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/eigens.dir/rule
+.PHONY : simple/CMakeFiles/eigens.dir/rule
+
+# Convenience name for target.
+eigens: simple/CMakeFiles/eigens.dir/rule
+.PHONY : eigens
+
+# fast build rule for target.
+eigens/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/eigens.dir/build.make simple/CMakeFiles/eigens.dir/build
+.PHONY : eigens/fast
+
+# Convenience name for target.
+simple/CMakeFiles/getplan.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/getplan.dir/rule
+.PHONY : simple/CMakeFiles/getplan.dir/rule
+
+# Convenience name for target.
+getplan: simple/CMakeFiles/getplan.dir/rule
+.PHONY : getplan
+
+# fast build rule for target.
+getplan/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/getplan.dir/build.make simple/CMakeFiles/getplan.dir/build
+.PHONY : getplan/fast
+
+# Convenience name for target.
+simple/CMakeFiles/navigatepoints.dir/rule:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/navigatepoints.dir/rule
+.PHONY : simple/CMakeFiles/navigatepoints.dir/rule
+
+# Convenience name for target.
+navigatepoints: simple/CMakeFiles/navigatepoints.dir/rule
+.PHONY : navigatepoints
+
+# fast build rule for target.
+navigatepoints/fast:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/navigatepoints.dir/build.make simple/CMakeFiles/navigatepoints.dir/build
+.PHONY : navigatepoints/fast
 
 # Convenience name for target.
 simple/CMakeFiles/roscpp_generate_messages_cpp.dir/rule:
@@ -275,119 +359,77 @@ rosgraph_msgs_generate_messages_py/fast:
 	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build.make simple/CMakeFiles/rosgraph_msgs_generate_messages_py.dir/build
 .PHONY : rosgraph_msgs_generate_messages_py/fast
 
-# Convenience name for target.
-simple/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-.PHONY : simple/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_cpp: simple/CMakeFiles/std_msgs_generate_messages_cpp.dir/rule
-.PHONY : std_msgs_generate_messages_cpp
-
-# fast build rule for target.
-std_msgs_generate_messages_cpp/fast:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/std_msgs_generate_messages_cpp.dir/build.make simple/CMakeFiles/std_msgs_generate_messages_cpp.dir/build
-.PHONY : std_msgs_generate_messages_cpp/fast
-
-# Convenience name for target.
-simple/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-.PHONY : simple/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_lisp: simple/CMakeFiles/std_msgs_generate_messages_lisp.dir/rule
-.PHONY : std_msgs_generate_messages_lisp
-
-# fast build rule for target.
-std_msgs_generate_messages_lisp/fast:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/std_msgs_generate_messages_lisp.dir/build.make simple/CMakeFiles/std_msgs_generate_messages_lisp.dir/build
-.PHONY : std_msgs_generate_messages_lisp/fast
-
-# Convenience name for target.
-simple/CMakeFiles/std_msgs_generate_messages_py.dir/rule:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f CMakeFiles/Makefile2 simple/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : simple/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-
-# Convenience name for target.
-std_msgs_generate_messages_py: simple/CMakeFiles/std_msgs_generate_messages_py.dir/rule
-.PHONY : std_msgs_generate_messages_py
-
-# fast build rule for target.
-std_msgs_generate_messages_py/fast:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/std_msgs_generate_messages_py.dir/build.make simple/CMakeFiles/std_msgs_generate_messages_py.dir/build
-.PHONY : std_msgs_generate_messages_py/fast
-
-followplan.o: followplan.cpp.o
-.PHONY : followplan.o
+eigens.o: eigens.cpp.o
+.PHONY : eigens.o
 
 # target to build an object file
-followplan.cpp.o:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/followplan.dir/build.make simple/CMakeFiles/followplan.dir/followplan.cpp.o
-.PHONY : followplan.cpp.o
+eigens.cpp.o:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/eigens.dir/build.make simple/CMakeFiles/eigens.dir/eigens.cpp.o
+.PHONY : eigens.cpp.o
 
-followplan.i: followplan.cpp.i
-.PHONY : followplan.i
+eigens.i: eigens.cpp.i
+.PHONY : eigens.i
 
 # target to preprocess a source file
-followplan.cpp.i:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/followplan.dir/build.make simple/CMakeFiles/followplan.dir/followplan.cpp.i
-.PHONY : followplan.cpp.i
+eigens.cpp.i:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/eigens.dir/build.make simple/CMakeFiles/eigens.dir/eigens.cpp.i
+.PHONY : eigens.cpp.i
 
-followplan.s: followplan.cpp.s
-.PHONY : followplan.s
+eigens.s: eigens.cpp.s
+.PHONY : eigens.s
 
 # target to generate assembly for a file
-followplan.cpp.s:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/followplan.dir/build.make simple/CMakeFiles/followplan.dir/followplan.cpp.s
-.PHONY : followplan.cpp.s
+eigens.cpp.s:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/eigens.dir/build.make simple/CMakeFiles/eigens.dir/eigens.cpp.s
+.PHONY : eigens.cpp.s
 
-move_around.o: move_around.cpp.o
-.PHONY : move_around.o
+getplan.o: getplan.cpp.o
+.PHONY : getplan.o
 
 # target to build an object file
-move_around.cpp.o:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/move_around.dir/build.make simple/CMakeFiles/move_around.dir/move_around.cpp.o
-.PHONY : move_around.cpp.o
+getplan.cpp.o:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/getplan.dir/build.make simple/CMakeFiles/getplan.dir/getplan.cpp.o
+.PHONY : getplan.cpp.o
 
-move_around.i: move_around.cpp.i
-.PHONY : move_around.i
+getplan.i: getplan.cpp.i
+.PHONY : getplan.i
 
 # target to preprocess a source file
-move_around.cpp.i:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/move_around.dir/build.make simple/CMakeFiles/move_around.dir/move_around.cpp.i
-.PHONY : move_around.cpp.i
+getplan.cpp.i:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/getplan.dir/build.make simple/CMakeFiles/getplan.dir/getplan.cpp.i
+.PHONY : getplan.cpp.i
 
-move_around.s: move_around.cpp.s
-.PHONY : move_around.s
+getplan.s: getplan.cpp.s
+.PHONY : getplan.s
 
 # target to generate assembly for a file
-move_around.cpp.s:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/move_around.dir/build.make simple/CMakeFiles/move_around.dir/move_around.cpp.s
-.PHONY : move_around.cpp.s
+getplan.cpp.s:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/getplan.dir/build.make simple/CMakeFiles/getplan.dir/getplan.cpp.s
+.PHONY : getplan.cpp.s
 
-moveongrid.o: moveongrid.cpp.o
-.PHONY : moveongrid.o
+navigatepoints.o: navigatepoints.cpp.o
+.PHONY : navigatepoints.o
 
 # target to build an object file
-moveongrid.cpp.o:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/moveongrid.dir/build.make simple/CMakeFiles/moveongrid.dir/moveongrid.cpp.o
-.PHONY : moveongrid.cpp.o
+navigatepoints.cpp.o:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/navigatepoints.dir/build.make simple/CMakeFiles/navigatepoints.dir/navigatepoints.cpp.o
+.PHONY : navigatepoints.cpp.o
 
-moveongrid.i: moveongrid.cpp.i
-.PHONY : moveongrid.i
+navigatepoints.i: navigatepoints.cpp.i
+.PHONY : navigatepoints.i
 
 # target to preprocess a source file
-moveongrid.cpp.i:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/moveongrid.dir/build.make simple/CMakeFiles/moveongrid.dir/moveongrid.cpp.i
-.PHONY : moveongrid.cpp.i
+navigatepoints.cpp.i:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/navigatepoints.dir/build.make simple/CMakeFiles/navigatepoints.dir/navigatepoints.cpp.i
+.PHONY : navigatepoints.cpp.i
 
-moveongrid.s: moveongrid.cpp.s
-.PHONY : moveongrid.s
+navigatepoints.s: navigatepoints.cpp.s
+.PHONY : navigatepoints.s
 
 # target to generate assembly for a file
-moveongrid.cpp.s:
-	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/moveongrid.dir/build.make simple/CMakeFiles/moveongrid.dir/moveongrid.cpp.s
-.PHONY : moveongrid.cpp.s
+navigatepoints.cpp.s:
+	cd /home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build && $(MAKE) -f simple/CMakeFiles/navigatepoints.dir/build.make simple/CMakeFiles/navigatepoints.dir/navigatepoints.cpp.s
+.PHONY : navigatepoints.cpp.s
 
 # Help Target
 help:
@@ -395,14 +437,20 @@ help:
 	@echo "... all (the default if no target is provided)"
 	@echo "... clean"
 	@echo "... depend"
+	@echo "... actionlib_generate_messages_cpp"
+	@echo "... actionlib_generate_messages_lisp"
+	@echo "... actionlib_generate_messages_py"
+	@echo "... actionlib_msgs_generate_messages_cpp"
+	@echo "... actionlib_msgs_generate_messages_lisp"
+	@echo "... actionlib_msgs_generate_messages_py"
 	@echo "... edit_cache"
-	@echo "... followplan"
+	@echo "... eigens"
+	@echo "... getplan"
 	@echo "... install"
 	@echo "... install/local"
 	@echo "... install/strip"
 	@echo "... list_install_components"
-	@echo "... move_around"
-	@echo "... moveongrid"
+	@echo "... navigatepoints"
 	@echo "... rebuild_cache"
 	@echo "... roscpp_generate_messages_cpp"
 	@echo "... roscpp_generate_messages_lisp"
@@ -410,19 +458,16 @@ help:
 	@echo "... rosgraph_msgs_generate_messages_cpp"
 	@echo "... rosgraph_msgs_generate_messages_lisp"
 	@echo "... rosgraph_msgs_generate_messages_py"
-	@echo "... std_msgs_generate_messages_cpp"
-	@echo "... std_msgs_generate_messages_lisp"
-	@echo "... std_msgs_generate_messages_py"
 	@echo "... test"
-	@echo "... followplan.o"
-	@echo "... followplan.i"
-	@echo "... followplan.s"
-	@echo "... move_around.o"
-	@echo "... move_around.i"
-	@echo "... move_around.s"
-	@echo "... moveongrid.o"
-	@echo "... moveongrid.i"
-	@echo "... moveongrid.s"
+	@echo "... eigens.o"
+	@echo "... eigens.i"
+	@echo "... eigens.s"
+	@echo "... getplan.o"
+	@echo "... getplan.i"
+	@echo "... getplan.s"
+	@echo "... navigatepoints.o"
+	@echo "... navigatepoints.i"
+	@echo "... navigatepoints.s"
 .PHONY : help
 
 

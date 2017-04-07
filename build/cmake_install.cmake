@@ -117,6 +117,17 @@ ENDIF(NOT CMAKE_INSTALL_COMPONENT OR "${CMAKE_INSTALL_COMPONENT}" STREQUAL "Unsp
 IF(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
   INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/gtest/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/cse180final/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_desktop/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_simulator/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_msgs/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/teleop_twist_keyboard/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_control/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_description/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_gazebo/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_navigation/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_ur5_moveit_config/cmake_install.cmake")
+  INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/husky_packages/husky_viz/cmake_install.cmake")
   INCLUDE("/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/build/simple/cmake_install.cmake")
 
 ENDIF(NOT CMAKE_INSTALL_LOCAL_ONLY)
