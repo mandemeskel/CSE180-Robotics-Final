@@ -1,8 +1,0 @@
-prefix=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/devel
-
-Name: husky_ur5_moveit_config
-Description: Description of husky_ur5_moveit_config
-Version: 0.2.7
-Cflags: 
-Libs: -L/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/devel/lib 
-Requires: 

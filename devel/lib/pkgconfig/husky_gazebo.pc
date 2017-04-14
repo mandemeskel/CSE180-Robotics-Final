@@ -1,8 +1,0 @@
-prefix=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/devel
-
-Name: husky_gazebo
-Description: Description of husky_gazebo
-Version: 0.2.6
-Cflags: 
-Libs: -L/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/devel/lib 
-Requires: 
