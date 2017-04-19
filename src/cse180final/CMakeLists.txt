@@ -1,6 +1,20 @@
 cmake_minimum_required(VERSION 2.8.3)
 project(cse180final)
 
+find_package( catkin REQUIRED COMPONENTS roscpp )
+find_package(catkin REQUIRED genmsg actionlib_msgs actionlib)
+## add_action_files(DIRECTORY action FILES DoDishes.action)
+## generate_messages(DEPENDENCIES actionlib_msgs)
+
+catkin_package()
+
+include_directories( include ${catkin_INCLUDE_DIRS} )
+
+## create make_plan node executables
+add_executable(make_plan make_plan.cpp)
+target_link_libraries(make_plan ${catkin_LIBRARIES})
+
+
 ## Add support for C++11, supported in ROS Kinetic and newer
 # add_definitions(-std=c++11)
 

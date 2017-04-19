@@ -1,0 +1,47 @@
+topic:
+/scan
+http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/LaserScan.html
+
+publishes:
+sensor_msgs/LaserScan.msg
+http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/LaserScan.html
+
+Header header            # timestamp in the header is the acquisition time of 
+                         # the first ray in the scan.
+                         #
+                         # in frame frame_id, angles are measured around 
+                         # the positive Z axis (counterclockwise, if Z is up)
+                         # with zero angle being forward along the x axis
+                         
+float32 angle_min        # start angle of the scan [rad]
+float32 angle_max        # end angle of the scan [rad]
+float32 angle_increment  # angular distance between measurements [rad]
+
+float32 time_increment   # time between measurements [seconds] - if your scanner
+                         # is moving, this will be used in interpolating position
+                         # of 3d points
+float32 scan_time        # time between scans [seconds]
+
+float32 range_min        # minimum range value [m]
+float32 range_max        # maximum range value [m]
+
+float32[] ranges         # range data [m] (Note: values < range_min or > range_max should be discarded)
+float32[] intensities    # intensity data [device-specific units].  If your
+                         # device does not provide intensities, please leave
+                         # the array empty.
+
+
+http://answers.ros.org/question/193327/xacro-problems-in-indigo/
+
+
+map_server > move_base 
+How send robot a list of vertices, a complete plan, which we want it to execut as opposed to individual vertices?
+Where to get the size of the robot?
+
+
+[ WARN] [1492464745.982685518, 2433.890000000]: Timed out waiting for transform from base_link to map to become available before running costmap, tf error: . canTransform returned after 0.1 timeout was 0.1.
+
+
+http://www.hessmer.org/blog/2011/04/24/using-the-ros-navigation-stack/
+https://books.google.com/books?id=2jjlCwAAQBAJ&pg=PA144&lpg=PA144&dq=ros+working+with+map+server&source=bl&ots=Az6mooZbce&sig=AhiIiIQuqFPaNkaaBv2MblQICic&hl=en&sa=X&ved=0ahUKEwj1t7HlsqzTAhWpgFQKHcnRAn0Q6AEIWTAI#v=onepage&q=ros%20working%20with%20map%20server&f=false
+
