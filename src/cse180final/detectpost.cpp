@@ -7,7 +7,7 @@
 using namespace std;
 
 
-#define NODE_NAME "laser_scan_listner"
+#define NODE_NAME "detectpost"
 #define TOPIC_NAME "/scan"
 
 bool DEBUGGING = true;
@@ -30,10 +30,10 @@ struct Post {
 		angle = 0;
 	}
 
-	Post( int start, int stop, int count ) {
+	Post( int start, int stop, int zero_count ) {
 		start_index = start;	
 		stop_index = stop;
-		index_size = count;
+		index_size = zero_count;
 	}
 
 };
@@ -86,14 +86,14 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 
 		} else if( zero_count >= MIN_POST_ZEROS ) {
 
-			recent_posts.push_back( new Post( start_index, stop_index, count ) );
-			count = 0;
+			recent_posts.push_back( new Post( start_index, stop_index, zero_count ) );
+			zero_count = 0;
 			start_index = NULL;			
 			stop_index = NULL;
 		
 		} else {
 
-			count = 0;
+			zero_count = 0;
 			start_index = NULL;			
 			stop_index = NULL;
 			
@@ -105,23 +105,24 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 
 	// calculate position of recently discovered posts
 	int index, range;
+	float angle;
 	for( int n = 0; n < recent_posts.size(); n++ ) {
 
-		index = (recent_posts[n]->distance / 2) + recent_posts[n]->start_index;
+		index = (recent_posts[n]->index_size / 2) + recent_posts[n]->start_index;
 		range = msg.ranges[ index ];
 
 		// calculate angle
 		if( index < 360 ) {
 
-			recent_posts[n]->angle = 135 - (index * ANGLE_CONVERTER);
+			angle = 135 - (index * ANGLE_CONVERTER);
 
 		} else if( index > 360 ) {
 
-			recent_posts[n]->angle = ANGLE_CONVERTER * (index - 360);
+			angle = ANGLE_CONVERTER * (index - 360);
 
 		} else {
 
-			recent_posts[n]->angle = 0;
+			angle = 0;
 		
 		}
 
@@ -132,8 +133,16 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 		recent_posts[n]->x = range * cosf(angle);
 		recent_posts[n]->y = range * sinf(angle);;
 		recent_posts[n]->range = range;
-		// ROS_INFO( "Post: ( %f, %f), Range: %f, Angle: " )
-		ROS_ERROR_STREAM( (*recent_posts[n]) );
+		recent_posts[n]->angle = angle;
+		ROS_INFO( 
+			"Post: ( [%f], [%f]), Range: [%f], Angle: [%f]",
+			recent_posts[n]->x,
+			recent_posts[n]->y,
+			range,
+			angle	 
+		);
+		//ROS_ERROR_STREAM( (*recent_posts[n]) );
+
 
 	}	
 	
