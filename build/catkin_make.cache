@@ -1,2 +1,0 @@
-cse180final:husky_packages/husky_control:husky_packages/husky_description:husky_packages/husky_desktop:husky_packages/husky_gazebo:husky_packages/husky_msgs:husky_packages/husky_navigation:husky_packages/husky_simulator:husky_packages/husky_ur5_moveit_config:husky_packages/husky_viz:simple:teleop_twist_keyboard
--DCATKIN_DEVEL_PREFIX=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/devel -DCMAKE_INSTALL_PREFIX=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/install -G Unix Makefiles

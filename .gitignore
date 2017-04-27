@@ -1,3 +1,9 @@
+# ros crap
+/build
+/devel
+/*
+!/src
+
 # Ubuntu gedit temp files
 ~*
 
@@ -33,3 +39,4 @@
 *.exe
 *.out
 *.app
+

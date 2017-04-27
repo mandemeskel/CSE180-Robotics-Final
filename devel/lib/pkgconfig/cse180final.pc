@@ -1,8 +1,0 @@
-prefix=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/devel
-
-Name: cse180final
-Description: Description of cse180final
-Version: 0.0.0
-Cflags: 
-Libs: -L/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/devel/lib 
-Requires: 

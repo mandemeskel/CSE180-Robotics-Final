@@ -1,8 +1,0 @@
-prefix=/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/install
-
-Name: husky_navigation
-Description: Description of husky_navigation
-Version: 0.2.7
-Cflags: 
-Libs: -L/home/michael/Documents/VSCode_Workspace/CSE180/CSE180_Workspace/install/lib 
-Requires: 
