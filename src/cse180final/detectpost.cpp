@@ -60,7 +60,7 @@ int main( int argc, char ** argv ) {
 }
 
 
-const int MIN_POST_ZEROS = 150; // 167 is the real number
+const int MIN_POST_ZEROS = 167; // 167 is the real number
 vector<Post *> posts;
 float ANGLE_CONVERTER = 0.375;
 void callback( const sensor_msgs::LaserScan & msg ) {
@@ -135,11 +135,12 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 		recent_posts[n]->range = range;
 		recent_posts[n]->angle = angle;
 		ROS_INFO( 
-			"Post: ( [%f], [%f]), Range: [%f], Angle: [%f]",
+			"Post: ( [%f], [%f]), Range: [%f], Angle: [%f], Index: [%f]",
 			recent_posts[n]->x,
 			recent_posts[n]->y,
 			range,
-			angle	 
+			angle,
+			index 
 		);
 		//ROS_ERROR_STREAM( (*recent_posts[n]) );
 
