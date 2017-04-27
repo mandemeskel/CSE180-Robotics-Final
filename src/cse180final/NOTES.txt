@@ -1,0 +1,157 @@
+TODO: make copy of global costmap map -/
+TODO: publish copy of global costmap map
+TODO: publish copy of global costmap map metadata (needed for setting cords where the robot should)
+TODO: make robot execute a plan based on global costmap map
+TODO: filter, where and what?
+
+
+topic:
+/scan
+http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/LaserScan.html
+
+publishes:
+sensor_msgs/LaserScan.msg
+http://docs.ros.org/kinetic/api/sensor_msgs/html/msg/LaserScan.html
+
+Header header            # timestamp in the header is the acquisition time of 
+                         # the first ray in the scan.
+                         #
+                         # in frame frame_id, angles are measured around 
+                         # the positive Z axis (counterclockwise, if Z is up)
+                         # with zero angle being forward along the x axis
+                         
+float32 angle_min        # start angle of the scan [rad]
+float32 angle_max        # end angle of the scan [rad]
+float32 angle_increment  # angular distance between measurements [rad]
+
+float32 time_increment   # time between measurements [seconds] - if your scanner
+                         # is moving, this will be used in interpolating position
+                         # of 3d points
+float32 scan_time        # time between scans [seconds]
+
+float32 range_min        # minimum range value [m]
+float32 range_max        # maximum range value [m]
+
+float32[] ranges         # range data [m] (Note: values < range_min or > range_max should be discarded)
+float32[] intensities    # intensity data [device-specific units].  If your
+                         # device does not provide intensities, please leave
+                         # the array empty.
+
+
+http://answers.ros.org/question/193327/xacro-problems-in-indigo/
+
+
+map_server > move_base 
+How send robot a list of vertices, a complete plan, which we want it to execut as opposed to individual vertices?
+Where to get the size of the robot?
+
+
+[ WARN] [1492464745.982685518, 2433.890000000]: Timed out waiting for transform from base_link to map to become available before running costmap, tf error: . canTransform returned after 0.1 timeout was 0.1.
+
+
+http://www.hessmer.org/blog/2011/04/24/using-the-ros-navigation-stack/
+https://books.google.com/books?id=2jjlCwAAQBAJ&pg=PA144&lpg=PA144&dq=ros+working+with+map+server&source=bl&ots=Az6mooZbce&sig=AhiIiIQuqFPaNkaaBv2MblQICic&hl=en&sa=X&ved=0ahUKEwj1t7HlsqzTAhWpgFQKHcnRAn0Q6AEIWTAI#v=onepage&q=ros%20working%20with%20map%20server&f=false
+
+
+/map
+/map_metadata
+/map_updates
+/move_base/DWAPlannerROS/cost_cloud
+/move_base/DWAPlannerROS/global_plan
+/move_base/DWAPlannerROS/local_plan
+/move_base/DWAPlannerROS/parameter_descriptions
+/move_base/DWAPlannerROS/parameter_updates
+/move_base/DWAPlannerROS/trajectory_cloud
+/move_base/NavfnROS/plan
+/move_base/cancel
+/move_base/current_goal
+/move_base/feedback
+/move_base/global_costmap/costmap
+/move_base/global_costmap/costmap_updates
+/move_base/global_costmap/footprint
+/move_base/global_costmap/inflation/parameter_descriptions
+/move_base/global_costmap/inflation/parameter_updates
+/move_base/global_costmap/parameter_descriptions
+/move_base/global_costmap/parameter_updates
+/move_base/global_costmap/static/parameter_descriptions
+/move_base/global_costmap/static/parameter_updates
+/move_base/goal
+/move_base/local_costmap/costmap
+/move_base/local_costmap/costmap_updates
+/move_base/local_costmap/footprint
+/move_base/local_costmap/inflation/parameter_descriptions
+/move_base/local_costmap/inflation/parameter_updates
+/move_base/local_costmap/obstacles_laser/parameter_descriptions
+/move_base/local_costmap/obstacles_laser/parameter_updates
+/move_base/local_costmap/parameter_descriptions
+/move_base/local_costmap/parameter_updates
+/move_base/parameter_descriptions
+/move_base/parameter_updates
+/move_base/result
+/move_base/status
+/move_base_simple/goal
+
+
+// move_base/global_costmap/footprint
+header: 
+  seq: 2796
+  stamp: 
+    secs: 3246
+    nsecs:  30000000
+  frame_id: map
+polygon: 
+  points: 
+    - 
+      x: -0.448742598295
+      y: -0.268761694431
+      z: 0.0
+    - 
+      x: -0.425631821156
+      y: 0.41084548831
+      z: 0.0
+    - 
+      x: 0.593778908253
+      y: 0.376179307699
+      z: 0.0
+    - 
+      x: 0.570668101311
+      y: -0.303427875042
+      z: 0.0
+---
+
+
+// move_base/local_costmap/footprint
+---
+header: 
+  seq: 5587
+  stamp: 
+    secs: 3943
+    nsecs: 800000000
+  frame_id: odom
+polygon: 
+  points: 
+    - 
+      x: -0.591759741306
+      y: -0.295995742083
+      z: 0.0
+    - 
+      x: -0.537435531616
+      y: 0.381830871105
+      z: 0.0
+    - 
+      x: 0.479304373264
+      y: 0.300344496965
+      z: 0.0
+    - 
+      x: 0.42498010397
+      y: -0.377482116222
+      z: 0.0
+---
+
+
+// move_base/local_costmap/costmap_updates
+// http://docs.ros.org/jade/api/map_msgs/html/msg/OccupancyGridUpdate.html
+Type: map_msgs/OccupancyGridUpdate
+
+
+
