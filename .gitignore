@@ -3,6 +3,7 @@
 /devel
 /*
 !/src
+!*.txt
 
 # Ubuntu gedit temp files
 ~*

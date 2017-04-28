@@ -52,6 +52,8 @@ int main( int argc, char ** argv ) {
 	// create the Subscriber and set the topic to listen to
 	ros::Subscriber sub = nh.subscribe( TOPIC_NAME, 1000, &callback );
 
+	ROS_INFO( "detectpost started" );
+
 	// listen to topic
 	ros::spin();
 
@@ -60,7 +62,7 @@ int main( int argc, char ** argv ) {
 }
 
 
-const int MIN_POST_ZEROS = 167; // 167 is the real number
+const int MIN_POST_ZEROS = 30; // number 0.0 for a post in msg.intensities
 vector<Post *> posts;
 float ANGLE_CONVERTER = 0.375;
 void callback( const sensor_msgs::LaserScan & msg ) {
@@ -76,23 +78,32 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 	int start_index = NULL;
 	int stop_index = NULL;
 	vector<Post *> recent_posts;
+	//vector<float> intensities;
+	vector<float> ranges;
 	for( int n = 0; n < msg.intensities.size(); n++ ) {
-	    
+
 		if( (float)msg.intensities[n] == 0.0 ) {
+
+			//intensities.push_back( n );
+			ranges.push_back( (float)msg.ranges[n] );
+			ROS_INFO( "Range: [%.6f], Index: [%.6f]", (float)msg.ranges[n], n );
 
 			zero_count++;			
 			if( start_index == NULL )
 				start_index = n;
 
 		} else if( zero_count >= MIN_POST_ZEROS ) {
-
+			
+			stop_index = n;
 			recent_posts.push_back( new Post( start_index, stop_index, zero_count ) );
+			//ROS_INFO( "Post Detected" );
 			zero_count = 0;
 			start_index = NULL;			
 			stop_index = NULL;
 		
 		} else {
 
+			//ROS_INFO( "False Post Detected" );
 			zero_count = 0;
 			start_index = NULL;			
 			stop_index = NULL;
@@ -103,9 +114,15 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 	}
 
 
+	for( int n = 0; n < ranges.size(); n++ ) {
+
+		//ROS_INFO( "Range: [%.6f], Index: [%.6f]", ranges[n], intensities[n] );		
+
+	}
+	
 	// calculate position of recently discovered posts
-	int index, range;
-	float angle;
+	/**int index;
+	float range, angle;
 	for( int n = 0; n < recent_posts.size(); n++ ) {
 
 		index = (recent_posts[n]->index_size / 2) + recent_posts[n]->start_index;
@@ -131,22 +148,24 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 		// TODO: right now it is relative to robot but we need it relative to map
 		// TODO: [POST][ROBOT][MA] = [POST_ACTUAL]	
 		recent_posts[n]->x = range * cosf(angle);
-		recent_posts[n]->y = range * sinf(angle);;
+		recent_posts[n]->y = range * sinf(angle);
 		recent_posts[n]->range = range;
 		recent_posts[n]->angle = angle;
+
 		ROS_INFO( 
-			"Post: ( [%f], [%f]), Range: [%f], Angle: [%f], Index: [%f]",
+			"Post: ( [%.6f], [%.6f]), Range: [%.6f], Angle: [%.6f], Index: [%d], Start: [%d], Index_Size: [%d], Expected Width: [%.6f]",
 			recent_posts[n]->x,
 			recent_posts[n]->y,
 			range,
 			angle,
-			index 
+			index,
+			recent_posts[n]->start_index,
+			recent_posts[n]->index_size,
+			2 * range * sinf(angle)
 		);
-		//ROS_ERROR_STREAM( (*recent_posts[n]) );
-
 
 	}	
-	
+	**/
 
 	if( recent_posts.size() == 0 )
 		ROS_ERROR_STREAM( "no posts detected" );
