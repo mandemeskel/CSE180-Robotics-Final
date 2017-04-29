@@ -1,0 +1,78 @@
+// husky scans left to right
+// front of husky is where the laser is
+// map squares are 1x1m
+// map width is 20m
+// map height is 20m
+// post intensity from any distance: 3.1092664570587305e-18
+
+// intensities of sole post
+3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18
+// ranges
+ 1.0986528396606445, 1.0808404684066772, 1.0717589855194092, 1.061420202255249, 1.0567995309829712, 1.0516458749771118, 1.0508922338485718, 1.0469245910644531, 1.04491126537323, 1.0445549488067627, 1.046452522277832, 1.0461989641189575, 1.0482832193374634, 1.047804594039917, 1.0534027814865112, 1.0584088563919067, 1.0617231130599976, 1.0668660402297974, 1.079261064529419, 1.0978857278823853,
+// angle 0 deg, on left side when husky is facing up
+
+
+// intensities of sole post
+3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18
+// ranges
+1.0278860330581665, 1.0049257278442383, 0.9951335787773132, 0.98569256067276, 0.9788867235183716, 0.9758064150810242, 0.9723886847496033, 0.9708179235458374, 0.9683874249458313, 0.9674292206764221, 0.9669046401977539, 0.9663891792297363, 0.9669760465621948, 0.9680563807487488, 0.969234049320221, 0.9715043902397156, 0.9759306311607361, 0.9810494780540466, 0.9854558110237122, 0.9929821491241455, 1.0037956237792969,
+// angle 180 deg, on right side of husky
+
+
+// intensities of sole post
+3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18, 3.1092664570587305e-18
+// ranges
+0.7534472346305847, 0.7347434759140015, 0.7228356003761292, 0.7175425291061401, 0.7094714641571045, 0.7083215713500977, 0.7031735181808472, 0.7008863687515259, 0.6976100206375122, 0.6967493295669556, 0.6949367523193359, 0.6932116746902466, 0.6944461464881897, 0.6926848888397217, 0.6900689005851746, 0.6920647621154785, 0.691667914390564, 0.6945700645446777, 0.6943386197090149, 0.6943492293357849, 0.6972871422767639, 0.7000571489334106, 0.7022503018379211, 0.704789936542511, 0.7085895538330078, 0.7126563787460327, 0.7199956774711609, 0.7281332015991211, 0.7408638596534729
+// angle 90 deg, in front of husky
+
+[ INFO] [1493426575.832063699, 10794.810000000]: PriorRange: [1.694899], Range1: [1.694899], Rangei: [1.680587], Radius Calc: [0.022216], Angle: [0.013108]
+[ INFO] [1493426575.832118087, 10794.810000000]: PriorRange: [1.694942], Range1: [1.694942], Rangei: [1.682021], Radius Calc: [0.022217], Angle: [0.013108]
+[ INFO] [1493426575.872074522, 10794.850000000]: PriorRange: [1.697362], Range1: [1.697362], Rangei: [1.681478], Radius Calc: [0.022249], Angle: [0.013108]
+[ INFO] [1493426575.872124084, 10794.850000000]: PriorRange: [1.696034], Range1: [1.696034], Rangei: [1.682451], Radius Calc: [0.022231], Angle: [0.013108]
+[ INFO] [1493426575.912094037, 10794.890000000]: PriorRange: [1.695675], Range1: [1.695675], Rangei: [1.681594], Radius Calc: [0.022227], Angle: [0.013108]
+[ INFO] [1493426575.912141211, 10794.890000000]: PriorRange: [1.695988], Range1: [1.695988], Rangei: [1.681856], Radius Calc: [0.022231], Angle: [0.013108]
+[ INFO] [1493426575.952071867, 10794.930000000]: PriorRange: [1.695694], Range1: [1.695694], Rangei: [1.681505], Radius Calc: [0.022227], Angle: [0.013108]
+[ INFO] [1493426575.952126401, 10794.930000000]: PriorRange: [1.696748], Range1: [1.696748], Rangei: [1.683323], Radius Calc: [0.022241], Angle: [0.013108]
+[ INFO] [1493426575.992059173, 10794.970000000]: PriorRange: [1.695112], Range1: [1.695112], Rangei: [1.682731], Radius Calc: [0.022219], Angle: [0.013108]
+[ INFO] [1493426575.992116584, 10794.970000000]: PriorRange: [1.694594], Range1: [1.694594], Rangei: [1.682363], Radius Calc: [0.022212], Angle: [0.013108]
+[ INFO] [1493426576.032054564, 10795.010000000]: PriorRange: [1.696249], Range1: [1.696249], Rangei: [1.681874], Radius Calc: [0.022234], Angle: [0.013108]
+[ INFO] [1493426576.032117078, 10795.010000000]: PriorRange: [1.696312], Range1: [1.696312], Rangei: [1.696213], Radius Calc: [0.033351], Angle: [0.019662]
+[ INFO] [1493426576.072067439, 10795.050000000]: PriorRange: [1.695816], Range1: [1.695816], Rangei: [1.681362], Radius Calc: [0.022228], Angle: [0.013108]
+[ INFO] [1493426576.072125446, 10795.050000000]: PriorRange: [1.697274], Range1: [1.697274], Rangei: [1.696137], Radius Calc: [0.033370], Angle: [0.019662]
+[ INFO] [1493426576.112064194, 10795.090000000]: PriorRange: [1.696534], Range1: [1.696534], Rangei: [1.683267], Radius Calc: [0.022238], Angle: [0.013108]
+[ INFO] [1493426576.112120055, 10795.090000000]: PriorRange: [1.694812], Range1: [1.694812], Rangei: [1.682676], Radius Calc: [0.022215], Angle: [0.013108]
+[ INFO] [1493426576.152060577, 10795.130000000]: PriorRange: [1.696111], Range1: [1.696111], Rangei: [1.682115], Radius Calc: [0.022232], Angle: [0.013108]
+[ INFO] [1493426576.152108267, 10795.130000000]: PriorRange: [1.696586], Range1: [1.696586], Rangei: [1.696244], Radius Calc: [0.033357], Angle: [0.019662]
+[ INFO] [1493426576.192060835, 10795.170000000]: PriorRange: [1.696074], Range1: [1.696074], Rangei: [1.679631], Radius Calc: [0.022232], Angle: [0.013108]
+[ INFO] [1493426576.192108095, 10795.170000000]: PriorRange: [1.695367], Range1: [1.695367], Rangei: [1.682870], Radius Calc: [0.022222], Angle: [0.013108]
+[ INFO] [1493426576.232066369, 10795.210000000]: PriorRange: [1.698852], Range1: [1.698852], Rangei: [1.698117], Radius Calc: [0.033401], Angle: [0.019662]
+[ INFO] [1493426576.232116017, 10795.210000000]: PriorRange: [1.696539], Range1: [1.696539], Rangei: [1.681793], Radius Calc: [0.022238], Angle: [0.013108]
+[ INFO] [1493426576.272067396, 10795.250000000]: PriorRange: [1.697715], Range1: [1.697715], Rangei: [1.682243], Radius Calc: [0.022253], Angle: [0.013108]
+[ INFO] [1493426576.272115776, 10795.250000000]: PriorRange: [1.696617], Range1: [1.696617], Rangei: [1.683815], Radius Calc: [0.022239], Angle: [0.013108]
+[ INFO] [1493426576.312071253, 10795.290000000]: PriorRange: [1.696993], Range1: [1.696993], Rangei: [1.680794], Radius Calc: [0.022244], Angle: [0.013108]
+[ INFO] [1493426576.312118739, 10795.290000000]: PriorRange: [1.696256], Range1: [1.696256], Rangei: [1.682945], Radius Calc: [0.022234], Angle: [0.013108]
+[ INFO] [1493426576.352058425, 10795.330000000]: PriorRange: [1.695864], Range1: [1.695864], Rangei: [1.681817], Radius Calc: [0.022229], Angle: [0.013108]
+[ INFO] [1493426576.352105108, 10795.330000000]: PriorRange: [1.695202], Range1: [1.695202], Rangei: [1.681637], Radius Calc: [0.022220], Angle: [0.013108]
+[ INFO] [1493426576.392075669, 10795.370000000]: PriorRange: [1.697640], Range1: [1.697640], Rangei: [1.695980], Radius Calc: [0.033377], Angle: [0.019662]
+[ INFO] [1493426576.392124110, 10795.370000000]: PriorRange: [1.696148], Range1: [1.696148], Rangei: [1.682294], Radius Calc: [0.022233], Angle: [0.013108]
+[ INFO] [1493426576.432056278, 10795.410000000]: PriorRange: [1.696367], Range1: [1.696367], Rangei: [1.695647], Radius Calc: [0.033352], Angle: [0.019662]
+[ INFO] [1493426576.432105805, 10795.410000000]: PriorRange: [1.695919], Range1: [1.695919], Rangei: [1.682124], Radius Calc: [0.022230], Angle: [0.013108]
+[ INFO] [1493426576.472078960, 10795.450000000]: PriorRange: [1.695660], Range1: [1.695660], Rangei: [1.681512], Radius Calc: [0.022226], Angle: [0.013108]
+[ INFO] [1493426576.472136205, 10795.450000000]: PriorRange: [1.695870], Range1: [1.695870], Rangei: [1.681193], Radius Calc: [0.022229], Angle: [0.013108]
+^Cmandemeskel@01-00-01-2e-4f-f7-e6:~/CSE180-Robotics-Labs$ rostopic echo scan
+header: 
+  seq: 11474
+  stamp: 
+    secs: 10846
+    nsecs: 490000000
+  frame_id: base_laser
+angle_min: -2.3561899662
+angle_max: 2.3561899662
+angle_increment: 0.0065540750511
+time_increment: 0.0
+scan_time: 0.0
+range_min: 0.10000000149
+range_max: 30.0
+ranges: [inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, 1.6977784633636475, 1.6847639083862305, 1.6749924421310425, 1.6690406799316406, 1.6658827066421509, 1.6624575853347778, 1.6644705533981323, 1.6659808158874512, 1.6690798997879028, 1.6753486394882202, 1.68545401096344, 1.7009838819503784, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, 1.9817687273025513, 1.9678974151611328, 1.9583239555358887, 1.9519315958023071, 1.9505058526992798, 1.949721336364746, 1.9522297382354736, 1.957574725151062, 1.964733600616455, 1.9794524908065796, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf, inf]
+
+

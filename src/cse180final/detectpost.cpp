@@ -65,6 +65,7 @@ int main( int argc, char ** argv ) {
 const int MIN_POST_ZEROS = 30; // number 0.0 for a post in msg.intensities
 vector<Post *> posts;
 float ANGLE_CONVERTER = 0.375;
+double POST_INTENSITY = 3.1092664570587305;
 void callback( const sensor_msgs::LaserScan & msg ) {
 
 	if( DEBUGGING ) {
@@ -73,6 +74,86 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 		
 	}
 
+	const float ERROR = 0.10;
+	const int HALF = msg.ranges.size() / 2;
+	const float INCREM = (float)msg.angle_increment;
+	//const float PI270 =  (float)msg.angle_max * 2;
+	const float POST_RADIUS = 0.07;
+	float prior_range = (float)msg.ranges[0];
+	float range = 0.0;
+	float angle = 0.0;
+	float radius_calc = 0.0;
+	//int index = 0;
+	//int width = 0;
+	vector<float> ranges;
+	for( int n = 1; n < msg.ranges.size(); n++ ) {
+
+		range = (float)msg.ranges[n];
+		//index = n;
+
+		if( isinf( prior_range ) && !isinf( range ) ) {
+			
+			prior_range = range;
+			ranges.push_back( range );		
+			continue;
+
+		} else if ( isinf( prior_range ) && isinf( range ) ) {
+
+			continue;		
+
+		}
+		
+		if( range < prior_range ) {
+			
+			ranges.push_back( range );
+			//width++;
+
+		} else if( ranges.size() > 0 ) {
+
+			angle = abs( (HALF - n) * INCREM ); // relative front of robot
+			radius_calc = ranges[0] * sinf( angle );
+			//ROS_INFO( "Angle: [%.6f], Half: [%d], n: [%d], Increm: [%.6f]", angle, HALF, n, INCREM );
+			
+			ROS_INFO( "PriorRange: [%.6f], Range1: [%.6f], Rangei: [%.6f], Radius Calc: [%.6f], Angle: [%.6f]", prior_range, ranges[0], ranges[ranges.size()-1], radius_calc,
+angle );			
+
+/**
+			if( ((radius_calc * ERROR) + radius_calc) >= POST_RADIUS && ((radius_calc * ERROR) - radius_calc) <= POST_RADIUS ) {
+				
+				ROS_INFO( "PriorRange: [%.6f], Range1: [%.6f], Rangei: [%.6f], Radius Calc: [%.6f], Angle: [%.6f]", prior_range, ranges[0], ranges[ranges.size()-1], radius_calc,
+angle );				
+
+			}
+**/
+			ranges.clear();
+			//width = 0;
+
+		} else {
+
+			ranges.clear();
+			//width = 0;	
+
+		}
+
+	}
+
+
+/**	
+	double intns = 0.0;
+	for( int n = 0; n < msg.intensities.size(); n++ ) {
+
+		intns = msg.intensities[n] * 1e18;
+		if( intns < POST_INTENSITY + 0.15 || intns > POST_INTENSITY - 0.15 ) {
+
+			ROS_INFO( "Range: [%.6f], Intensity: [%f], Expected: [%f], Index: [%d]", (float)msg.ranges[n], intns, POST_INTENSITY, n );
+
+		}
+
+	}
+**/
+
+
+/**
     	// loop through intensities to detect post signatures
 	int zero_count = 0;
 	int start_index = NULL;
@@ -82,11 +163,11 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 	vector<float> ranges;
 	for( int n = 0; n < msg.intensities.size(); n++ ) {
 
-		if( (float)msg.intensities[n] == 0.0 ) {
+		if( (float)msg.intensities[n] == POST_INTENSITY ) {
 
-			//intensities.push_back( n );
+			intensities.push_back( n );
 			ranges.push_back( (float)msg.ranges[n] );
-			ROS_INFO( "Range: [%.6f], Index: [%.6f]", (float)msg.ranges[n], n );
+			// ROS_INFO( "Range: [%.6f], Index: [%.6f]", (float)msg.ranges[n], n );
 
 			zero_count++;			
 			if( start_index == NULL )
@@ -113,12 +194,15 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 	    
 	}
 
+**/
 
+/**
 	for( int n = 0; n < ranges.size(); n++ ) {
 
-		//ROS_INFO( "Range: [%.6f], Index: [%.6f]", ranges[n], intensities[n] );		
+		ROS_INFO( "Range: [%.6f], Index: [%.6f]", ranges[n], intensities[n] );		
 
 	}
+**/
 	
 	// calculate position of recently discovered posts
 	/**int index;
@@ -167,8 +251,8 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 	}	
 	**/
 
-	if( recent_posts.size() == 0 )
-		ROS_ERROR_STREAM( "no posts detected" );
+	//if( recent_posts.size() == 0 )
+	//	ROS_ERROR_STREAM( "no posts detected" );
 
 }
 
