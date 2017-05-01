@@ -4,6 +4,7 @@
 /*
 !/src
 !*.txt
+!*.xlsx
 
 # Ubuntu gedit temp files
 ~*
