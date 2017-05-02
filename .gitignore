@@ -6,6 +6,9 @@
 !*.txt
 !*.xlsx
 
+/src/simple.zip
+/src/simple
+
 # Ubuntu gedit temp files
 ~*
 

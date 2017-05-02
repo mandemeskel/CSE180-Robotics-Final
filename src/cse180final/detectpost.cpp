@@ -3,6 +3,7 @@
 #include <sensor_msgs/LaserScan.h>
 #include <iostream>
 #include <cmath>
+#include <utility>
 
 using namespace std;
 
@@ -74,33 +75,130 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 		
 	}
 
-    const float RANGE_LIMIT = 5.0; // the range limit we are setting for the laser
+    const float RANGE_MAX = 5.0; // the range limit we are setting for the laser
+	const float RANGE_MIN = 0.70;
 	const float ERROR = 0.10;
 	const int HALF = msg.ranges.size() / 2;
 	const float INCREM = (float)msg.angle_increment;
 	//const float PI270 =  (float)msg.angle_max * 2;
 	const float POST_RADIUS = 0.07;
 	float prior_range = (float)msg.ranges[0];
+	float min_range = 0.0;
+	float max_range_right = 0.0;
+    float max_range_left = 0;
 	float range = 0.0;
 	float angle = 0.0;
 	float radius_calc = 0.0;
-	//int index = 0;
+	int half_width = 0;
 	int width = 0;
 	vector<float> ranges;
-	for( int n = 1; n < msg.ranges.size(); n++ ) {
+// 	vector< Pair<float, float> > profiles;
+	for( int n = 0; n < msg.ranges.size(); n++ ) {
 
 		range = (float)msg.ranges[n];
-		//index = n;
+        
+        // bad range
+        if( range > RANGE_MAX || range < RANGE_MIN  ) {
+            
+            // reset
+            max_range_left = 0;
+            min_range = 0;
+            width = 0;
+            half_width = 0;
+            continue;
+        
+        } else if( max_range_left == 0 )
+        
+            max_range_left = range;
+            
+        else if( max_range_left - range > 0 )
+        
+            width++;
+            
+        else {
+         
+            if( min_range == 0 ) {
+            
+                min_range = range;
+                half_width = width;
+                
+            }
+            
+            width++;
+            
+            // check for post
+            if( half_width <= width/2 )
+                ROS_INFO( "POST_DETECTED" );
+            
+        }
+    
+        /**
+        ROS_INFO( "Range: [%.6f]", range );
+        
+        ROS_INFO( "Max1: [%.6f], Max2: [%.6f], Min: [%.6f], Width: [%d], Half: [%d]", 
+	        max_range_left,
+	        max_range_right, 
+	        min_range,
+	        width,
+	        half_width
+    	);
+		    	
+		// stay in the bubble
+        if( max_range_left > RANGE_MAX || max_range_left < RANGE_MIN ) {
+            
+            max_range_left = range;
+            min_range = range;
+            ROS_INFO( "new max" );   
+            
+        // left side of porabola
+        } else if( max_range_left > range && min_range > range) {
+            
+            width++;
+            half_width = width;
+            min_range = range;
+            ROS_INFO( "left" );
+            
+        // right side of porabola
+        } else if( min_range < range && half_width > 0 ) {
+        
+            width++;
+            half_width--;
+            ROS_INFO( "right" );
+        
+        // found 2nd maximum
+        } else if( min_range < range && half_width == 0 ) {
+            
+            max_range_right = range;
+            //if( isPost( min_range, width-1 ) )
+            if( true )
+                ROS_INFO( "post detected" );
+		    
+		    // reset
+            max_range_left = 0;
+            width = 0;
+            half_width = 0;
+            
+        } else {
+            
+            ROS_INFO( "else reset" );
+            // reset
+            max_range_left = range;
+            min_range = range;
+            width = 0;
+            half_width = 0;
+            
+        }
+            **/
+
+        /**
 
         // limit our scan for posts to certain radius
-// 		if( isinf( prior_range ) && !isinf( range ) ) {
 		if( prior_range > RANGE_LIMIT && range <= RANGE_LIMIT ) {
 			
 			prior_range = range;
 			ranges.push_back( range );		
 			continue;
 
-// 		} else if ( isinf( prior_range ) && isinf( range ) ) {
         } else if ( prior_range > RANGE_LIMIT && range > RANGE_LIMIT ) {
 
 			continue;		
@@ -129,14 +227,6 @@ void callback( const sensor_msgs::LaserScan & msg ) {
 // 			ROS_INFO( "PriorRange: [%.6f], Range1: [%.6f], Rangei: [%.6f], RangeDelta: [%.6f], Radius Calc: [%.6f], Angle: [%.6f]", prior_range, ranges[0], ranges[ranges.size()-1], ranges[0] - ranges[ranges.size()-1], radius_calc,
 // angle );			
 
-/**
-			if( ((radius_calc * ERROR) + radius_calc) >= POST_RADIUS && ((radius_calc * ERROR) - radius_calc) <= POST_RADIUS ) {
-				
-				ROS_INFO( "PriorRange: [%.6f], Range1: [%.6f], Rangei: [%.6f], Radius Calc: [%.6f], Angle: [%.6f]", prior_range, ranges[0], ranges[ranges.size()-1], radius_calc,
-angle );				
-
-			}
-**/
 			ranges.clear();
 			width = 0;
 
@@ -146,7 +236,8 @@ angle );
 			width = 0;	
 
 		}
-
+        **/
+        
 	}
 
 
