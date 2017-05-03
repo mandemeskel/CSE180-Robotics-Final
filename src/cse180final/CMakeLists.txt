@@ -10,10 +10,6 @@ catkin_package()
 
 include_directories( include ${catkin_INCLUDE_DIRS} )
 
-## create make_plan node executables
-add_executable(make_plan make_plan.cpp)
-target_link_libraries(make_plan ${catkin_LIBRARIES})
-
 
 ## Add support for C++11, supported in ROS Kinetic and newer
 # add_definitions(-std=c++11)
@@ -22,7 +18,8 @@ target_link_libraries(make_plan ${catkin_LIBRARIES})
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
 find_package(catkin REQUIRED)
-
+find_package(Eigen3 REQUIRED)
+include_directories(${EIGEN3_INCLUDE_DIR})
 
 ###################################
 ## catkin specific configuration ##
@@ -41,6 +38,21 @@ catkin_package(
 )
 
 
+## create make_plan node executables
+# add_executable(make_plan make_plan.cpp)
+# target_link_libraries(make_plan ${catkin_LIBRARIES})
+
 ## create detect post node executables
-add_executable(detectpost detectpost.cpp)
-target_link_libraries(detectpost ${catkin_LIBRARIES})
+# add_executable(detectpost detectpost.cpp)
+# target_link_libraries(detectpost ${catkin_LIBRARIES})
+
+add_executable(scan_cloud scan_cloud.cpp)
+target_link_libraries(scan_cloud ${catkin_LIBRARIES})
+
+
+
+
+
+
+
+
