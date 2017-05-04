@@ -8,8 +8,8 @@ find_package(catkin REQUIRED genmsg actionlib_msgs actionlib)
 
 catkin_package()
 
-include_directories( include ${catkin_INCLUDE_DIRS} )
-
+#include_directories( include ${catkin_INCLUDE_DIRS} )
+include_directories( include ${catkin_INCLUDE_DIRS} ${EIGEN_INCLUDE_DIR} )
 
 ## Add support for C++11, supported in ROS Kinetic and newer
 # add_definitions(-std=c++11)
@@ -17,9 +17,11 @@ include_directories( include ${catkin_INCLUDE_DIRS} )
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
-find_package(Eigen3 REQUIRED)
+find_package(catkin REQUIRED )
+# find_package(catkin REQUIRED COMPONENTS tf eigen)
 include_directories(${EIGEN3_INCLUDE_DIR})
+# include_directories(${TF_INCLUDE_DIR})
+
 
 ###################################
 ## catkin specific configuration ##
@@ -46,10 +48,11 @@ catkin_package(
 # add_executable(detectpost detectpost.cpp)
 # target_link_libraries(detectpost ${catkin_LIBRARIES})
 
-add_executable(scan_cloud scan_cloud.cpp)
-target_link_libraries(scan_cloud ${catkin_LIBRARIES})
+# add_executable(scan_cloud scan_cloud.cpp)
+# target_link_libraries(scan_cloud ${catkin_LIBRARIES})
 
-
+add_executable(pointcloud pointcloud.cpp)
+target_link_libraries(pointcloud ${catkin_LIBRARIES})
 
 
 

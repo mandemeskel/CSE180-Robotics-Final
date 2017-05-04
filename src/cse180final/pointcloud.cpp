@@ -1,15 +1,5 @@
-// http://wiki.ros.org/laser_pipeline/Tutorials/IntroductionToWorkingWithLaserScannerData
-// scan_cloud.cpp
-// TODO: change topic name
-// sudo apt-get install python-catkin-build-tools
-// occupancy grid utils github
-// at 0.7m 30 is size of post in ranges indices at 20m 1 indeces is the size
-// tmux linux terminal
 #include <ros/ros.h>
-#include <tf/transform_listener.h>
-#include <sensor_msgs/PointCloud.h>
-#include <tf/message_filter.h>
-#include <message_filters/subscriber.h>
+#include <tf2_ros/transform_listener.h>
 #include <laser_geometry/laser_geometry.h>
 #include <geometry_msgs/Point32.h>
 #include <vector>
@@ -19,67 +9,60 @@ using namespace std;
 vector<int> detectPost(  const vector<float> );
 
 
-class LaserScanToPointCloud{
+class My_Filter {
+    public:
+        My_Filter();
+        void scanCallback(const sensor_msgs::LaserScan::ConstPtr& scan);
+    private:
+        ros::NodeHandle node_;
+        laser_geometry::LaserProjection projector_;
+        tf2::TransformListener tfListener_;
 
-public:
+        ros::Publisher point_cloud_publisher_;
+        ros::Subscriber scan_sub_;
+};
 
-  ros::NodeHandle n_;
-  laser_geometry::LaserProjection projector_;
-  tf::TransformListener listener_;
-  message_filters::Subscriber<sensor_msgs::LaserScan> laser_sub_;
-  tf::MessageFilter<sensor_msgs::LaserScan> laser_notifier_;
-  ros::Publisher scan_pub_;
 
-  LaserScanToPointCloud(ros::NodeHandle n) : 
-    n_(n),
-    laser_sub_(n_, "scan", 10),
-    laser_notifier_(laser_sub_,listener_, "map", 10)
-  {
-    laser_notifier_.registerCallback(
-      boost::bind(&LaserScanToPointCloud::scanCallback, this, _1));
-    laser_notifier_.setTolerance(ros::Duration(0.01));
-    scan_pub_ = n_.advertise<sensor_msgs::PointCloud>("/my_cloud",1);
-  }
-
-  void scanCallback (const sensor_msgs::LaserScan::ConstPtr& scan_in)
-  {
-
-    sensor_msgs::PointCloud cloud;
-    try
-    {
-        projector_.transformLaserScanToPointCloud(
-          "map",*scan_in, cloud,listener_);
-    }
-    catch (tf::TransformException& e)
-    {
-        std::cout << e.what();
-        return;
-    }
+My_Filter::My_Filter() {
     
+    scan_sub_ = node_.subscribe<sensor_msgs::LaserScan> ("/scan", 100, &My_Filter::scanCallback, this);
+    point_cloud_publisher_ = node_.advertise<sensor_msgs::PointCloud2> ("/cloud", 100, false);
+    tfListener_.setExtrapolationLimit(ros::Duration(0.1));
+
+}
+
+void My_Filter::scanCallback( const sensor_msgs::LaserScan::ConstPtr & scan ) {
+
+    // sensor_msgs::PointCloud2 cloud;
+    sensor_msgs::PointCloud cloud;    
+    projector_.transformLaserScanToPointCloud("map", *scan, cloud, tfListener_);
+
     // convert range index to position
-    vector<int> posts = detectPost( scan_in->ranges );
+    vector<int> posts = detectPost( scan->ranges );
     vector<geometry_msgs::Point32> postpos;
     for( unsigned int n = 0; n < posts.size(); n++ )
     {
         postpos.push_back( cloud.points[posts[n]] );
         ROS_ERROR_STREAM( cloud.points[posts[n]] );
 	}
-    scan_pub_.publish(cloud);
 
-  }
-};
-
-int main(int argc, char** argv) {
-  
-  ros::init(argc, argv, "scan_cloud");
-  ros::NodeHandle n;
-  LaserScanToPointCloud lstopc(n);
-  
-  ros::spin();
-  
-  return 0;
+    point_cloud_publisher_.publish(cloud);
 
 }
+
+
+int main( int argc, char** argv ) {
+
+    ros::init(argc, argv, "pointcloud");
+
+    My_Filter filter;
+
+    ros::spin();
+
+    return 0;
+
+}
+
 
 
 const float MAX_RANGE = 4.0;
@@ -166,3 +149,4 @@ vector<int> detectPost( const vector<float> ranges ) {
 
     return posts;
 }
+
