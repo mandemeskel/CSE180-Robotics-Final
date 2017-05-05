@@ -4,13 +4,21 @@
 #include <string>
 #include <geometry_msgs/Pose2D.h>
 #include <geometry_msgs/Twist.h>
+#include <sensor_msgs/LaserScan.h>
 #include <nav_msgs/Odometry.h>
 #include <random_numbers/random_numbers.h>
+#include <tf/transform_listener.h>
+#include <message_filters/subscriber.h>
+#include <message_filters/time_synchronizer.h>
+
 
 using namespace std;
+using namespace message_filters;
+using namespace nav_msgs;
+
 
 #define NODE_NAME "navigatepoints"
-#define TOPIC_NAME "move_base"
+#define TOPIC_NAME "/move_base"
 
 // current husky position
 geometry_msgs::Pose2D currentLocation;
@@ -20,17 +28,24 @@ geometry_msgs::Pose2D priorLocation;
 random_numbers::RandomNumberGenerator* rng = new random_numbers::RandomNumberGenerator();
 
 // if obstacle is in front of husky, stop it
-bool stop = false;
+bool stop = true;
 
-// husky controller
-actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> ac( TOPIC_NAME, true );
+// check if the current location has been updated
+bool current_location_fresh = false;
+
+// publisher
+typedef actionlib::SimpleActionClient<move_base_msgs::MoveBaseAction> MoveBaseClient;
+
+// goal
+move_base_msgs::MoveBaseGoal * currentGoal;
 
 move_base_msgs::MoveBaseGoal * createGoal( geometry_msgs::Pose2D );
 move_base_msgs::MoveBaseGoal * createGoal( int, int, float );
 move_base_msgs::MoveBaseGoal * createGoal();
 string testState( actionlib::SimpleClientGoalState );
 void laserHandler( const sensor_msgs::LaserScan & );
-void odometryhandler(const nav_msgs::Odometry::ConstPtr & );
+//void odometryHandler(const nav_msgs::Odometry::ConstPtr & );
+void odometryHandler(const nav_msgs::Odometry & );
 void moveHusky( move_base_msgs::MoveBaseGoal * );
 
 
@@ -38,6 +53,9 @@ int main(int argc,char **argv) {
 
     ros::init( argc, argv, NODE_NAME );
     ros::NodeHandle nh;
+    
+    // husky controller
+    MoveBaseClient ac( TOPIC_NAME, true );
 
     ROS_INFO_STREAM("Waiting for server to be available...");
     while ( !ac.waitForServer() ) {
@@ -46,36 +64,35 @@ int main(int argc,char **argv) {
     ROS_INFO_STREAM("done!");
 
     // get current location
-    nh.subscribe( "/odom/filtered", 10, odometryHandler );
-    
+    // nh.subscribe( "/odometry/filtered", 1, odometryHandler );
+    message_filters::Subscriber<Odometry> odom_sub( nh, "/odometry/filtered", 10 );    
+    odom_sub.registerCallback( odometryHandler );
+
     // look for obstacles
-    nh.subscribe( "/scan", 10, laserHandler );
-
-
-    // create goal to send to the bot
-    // this goal fails because theta is 0.0:
-    // [ERROR] [1488523621.229798856, 15.870000000]: Quaternion has length close to zero... discarding as navigation goal
-    // [ERROR] [1488523630.631711562, 25.230000000]: Quaternion has length close to zero... discarding as navigation goal
-    move_base_msgs::MoveBaseGoal * goal;
+    // nh.subscribe( "/scan", 10, laserHandler );
+    message_filters::Subscriber<sensor_msgs::LaserScan> laser_sub( nh, "/scan", 10 );
+    laser_sub.registerCallback( laserHandler );
 
     // new goal
     while( true ) {
         
-        ros.spinOnce();
+        ros::spinOnce();
 
-        if( !stop ) {
+        if( !stop && current_location_fresh ) {
 
-            goal = createGoal();
+            currentGoal = createGoal();
 
             // copy last safe position
             priorLocation.x  = currentLocation.x;
             priorLocation.y  = currentLocation.y;
             priorLocation.theta  = currentLocation.theta;
 
-            ac.sendGoal( *goal );
-            ac.waitForResult();
-            ROS_INFO_STREAM( testState( ac.getState() ) );
-            delete goal;
+            moveHusky( currentGoal );
+            // ac.sendGoal( *currentGoal );
+            // wait for 15 secs for goal to be finished
+            // ac.waitForResult( ros::Duration( 15.0 ) );
+            // ROS_INFO_STREAM( testState( ac.getState() ) );
+            delete currentGoal;
         
         }
         
@@ -87,11 +104,13 @@ int main(int argc,char **argv) {
 
 
 void moveHusky( move_base_msgs::MoveBaseGoal * goal ) {
-
+   
+    MoveBaseClient ac( TOPIC_NAME, true );
     ac.sendGoal( *goal );
-    ac.waitForResult();
+    // wait for 15 secs for goal to be finished
+    ac.waitForResult( ros::Duration( 15.0 ) );
     ROS_INFO_STREAM( testState( ac.getState() ) );
-    delete goal;
+    // delete goal;
 
 }
 
@@ -105,6 +124,9 @@ move_base_msgs::MoveBaseGoal * createGoal( geometry_msgs::Pose2D pose ) {
     goal->target_pose.pose.position.x = pose.x;
     goal->target_pose.pose.position.y = pose.y;
     goal->target_pose.pose.orientation.w = pose.theta;
+
+    // update state
+    current_location_fresh = false;    
 
     return goal;
 
@@ -121,6 +143,9 @@ move_base_msgs::MoveBaseGoal * createGoal( int x, int y, float angle ) {
     goal->target_pose.pose.position.y = y;
     goal->target_pose.pose.orientation.w = angle;
 
+    // update state
+    current_location_fresh = false;    
+
     return goal;
 
 }
@@ -135,9 +160,27 @@ move_base_msgs::MoveBaseGoal * createGoal() {
 
     // randomly generated goal
     // TODO: check with global_costmap to see if this is an open cell
-    goal->theta = rng->gaussian(currentLocation.theta, 0.25);
-    goal->x = currentLocation.x + (0.5 * cos(goalLocation.theta));
-    goal->y = currentLocation.y + (0.5 * sin(goalLocation.theta));
+    float theta = rng->gaussian(currentLocation.theta, 0.1);
+    goal->target_pose.pose.position.x = currentLocation.x + (0.75 * cos( theta ));
+    goal->target_pose.pose.position.y = currentLocation.y + (0.75 * sin( theta ));
+    goal->target_pose.pose.orientation.w = theta; // TO DEGREES
+
+    ROS_INFO( 
+        "Goal, x: [%.6f], y: [%.6f], theta: [%.6f]",
+        goal->target_pose.pose.position.x,
+        goal->target_pose.pose.position.y,
+        goal->target_pose.pose.orientation.w
+    );
+
+    ROS_INFO( 
+        "Current, x: [%.6f], y: [%.6f], theta: [%.6f]",
+        currentLocation.x,
+        currentLocation.y,
+        currentLocation.theta
+    );
+
+    // update state
+    current_location_fresh = false;    
 
     return goal;
 
@@ -157,7 +200,9 @@ string testState( actionlib::SimpleClientGoalState state ) {
 
 }
 
-void odometryhandler(const nav_msgs::Odometry::ConstPtr & message) {
+/**
+void odometryHandler(const nav_msgs::Odometry::ConstPtr & message) {
+
     //Get (x,y) location directly from pose
     currentLocation.x = message->pose.pose.position.x;
     currentLocation.y = message->pose.pose.position.y;
@@ -168,29 +213,85 @@ void odometryhandler(const nav_msgs::Odometry::ConstPtr & message) {
     double roll, pitch, yaw;
     m.getRPY(roll, pitch, yaw);
     currentLocation.theta = yaw;
+
+    // update state
+    current_location_fresh = true;
+
+}
+**/
+
+void odometryHandler(const nav_msgs::Odometry & message) {
+
+    //Get (x,y) location directly from pose
+    currentLocation.x = message.pose.pose.position.x;
+    currentLocation.y = message.pose.pose.position.y;
+
+    //Get theta rotation by converting quaternion orientation to pitch/roll/yaw
+    tf::Quaternion q(
+        message.pose.pose.orientation.x, 
+        message.pose.pose.orientation.y, 
+        message.pose.pose.orientation.z, 
+        message.pose.pose.orientation.w
+    );
+    tf::Matrix3x3 m(q);
+    double roll, pitch, yaw;
+    m.getRPY(roll, pitch, yaw);
+    currentLocation.theta = yaw;
+
+    // update state
+    current_location_fresh = true;
+
 }
 
-
+// msg.ranges.size() - 200
+const unsigned int max_angle = 520;
 void laserHandler( const sensor_msgs::LaserScan & msg ) {
 
-    float range = 0;
-    for( unsigned int n = 200; n < msg.ranges.size() - 520; n++ ) {
+
+    float range = 0.0;
+    float new_theta = 0.0;
+    unsigned int n;
+    for( n = 200; n < max_angle; n++ ) {
 
         range = (float) msg.ranges[n];
 
-        if( range > 1 ) continue;
+        if( range > 0.75 ) continue;
+
+        // obstacle           
+        ROS_INFO( 
+            "obstacle found range: [%.6f], angle: [%.6f]",
+            range,
+            currentLocation.theta 
+        );
 
         // stop husky
         stop = true;
 
         // move the husky back to last safe position
-        moveHusky( createGoal( priorLocation ) );
+        // turn husky by 4degs left and right
+        if( n > 360 )
+            new_theta = currentLocation.theta + 0.261799;// 0.0698132
+        else
+            new_theta = currentLocation.theta - 0.261799; // 0.0698132
 
-        break;
+        move_base_msgs::MoveBaseGoal * temp = createGoal( 
+            currentLocation.x,
+            currentLocation.y,
+            new_theta
+        );
+        ROS_INFO( 
+            "Goal, x: [%.6f], y: [%.6f], theta: [%.6f]",
+            temp->target_pose.pose.position.x,
+            temp->target_pose.pose.position.y,
+            temp->target_pose.pose.orientation.w
+        );
+        moveHusky( temp );
+        delete temp;
 
     }
 
-    stop = false;
+    if( n  >= max_angle )
+        stop = false;
 
 }
 

@@ -5,6 +5,7 @@
 !/src
 !*.txt
 !*.xlsx
+!.sh
 
 /src/simple.zip
 /src/simple
