@@ -8,8 +8,8 @@
 #include <nav_msgs/Odometry.h>
 #include <random_numbers/random_numbers.h>
 #include <tf/transform_listener.h>
-#include <message_filters/subscriber.h>
-#include <message_filters/time_synchronizer.h>
+// #include <message_filters/subscriber.h>
+// #include <message_filters/time_synchronizer.h>
 #include <vector>
 #include <cmath>
 #include <sstream>
@@ -37,20 +37,28 @@ const float LINEAR_SPEED = 0.5;
 // angular speed of husky, 15deg/s
 const float ANGULAR_SPEED = 0.261799;
 
+// the minimum angle to avoid obstacle, in LaserScan::ranges index
+const unsigned int MIN_ANGLE = 260;
+
+// the maximum angle to avoid obstacle, in LaserScan::ranges index
+const unsigned int MAX_ANGLE = 460;
+
+// minimum desired free space range to consider for exploration
+const float DESIRED_RANGE = 7.0;
+
+// mind your personal space, any obstacles less than this will trigger
+// obstacle avoidance
+const float TOO_CLOSE = 1; // can be 0.75 but will cause a lot of close calls
+
+// don't go outside the map, don't just drive in a straight line for
+// a prolonged period of time
+const float MAX_RANGE = 20.0;
+
 // twist publisher, for obstacle avoidance
 ros::Publisher twist_pub;
 
 // for getting next random position
 random_numbers::RandomNumberGenerator* rng = new random_numbers::RandomNumberGenerator();
-
-// if obstacle is in front of husky, stop it
-bool stop = true;
-
-// check if the current location has been updated
-bool current_location_fresh = false;
-
-// status of current goal
-bool goal_accomplished = true;
 
 // do we need to publish a twist msg to husky?
 bool publish = false;
@@ -60,6 +68,11 @@ Twist twist_msg;
 
 // the goal range we are pursing
 float goal_range = 0.0;
+
+// the LaserSan::Ranges index of goal range, we use this
+// as angle to tell husky which way to turn when avoiding
+// obstacles, htis prevents a back and forth stuck turning scenario
+int goal_index = 0;
 
 // topic callbacks
 void laserHandler( const sensor_msgs::LaserScan & );
@@ -80,27 +93,17 @@ int main(int argc,char **argv) {
     ROS_INFO( "randomnav started!" );
 
     // publish to cmd_vel to send dirct messages to avoid obstacles
-    twist_pub = nh.advertise<geometry_msgs::Twist>( "cmd_vel", 100 );
+    twist_pub = nh.advertise<geometry_msgs::Twist>( "cmd_vel", 1 );
+
+    // look for obstacles and set goal
+    ros::Subscriber laser_sub = nh.subscribe( "scan", 1, &laserHandler );
+    // message_filters::Subscriber<sensor_msgs::LaserScan> laser_sub( nh, "/scan", 100 );
+    // laser_sub.registerCallback( laserHandler );
+
+    ROS_INFO( "randomnav spinning..." );
     
     // set publisher rate
     ros::Rate rate( 1 );
-
-    // get current location
-    // nh.subscribe( "/odometry/filtered", 1, odometryHandler );
-    // message_filters::Subscriber<Odometry> odom_sub( nh, "/odometry/filtered", 1 );    
-    // odom_sub.registerCallback( odometryHandler );
-
-    // look for obstacles and set goal
-    // nh.subscribe( "scan", 1000, laserHandler );
-    message_filters::Subscriber<sensor_msgs::LaserScan> laser_sub( nh, "/scan", 100 );
-    laser_sub.registerCallback( laserHandler );
-
-    // check status of goal
-    // message_filters::Subscriber<sensor_msgs::LaserScan> goal_sub( nh, "/move_base/status", 1 );
-    // goal_sub.registerCallback( laserHandler );
-
-    ROS_INFO( "randomnav spinning..." );
-    // ros::spin();
 
     while( ros::ok() ) {
 
@@ -123,11 +126,6 @@ int main(int argc,char **argv) {
 }
 
 
-const unsigned int MIN_ANGLE = 260;
-const unsigned int MAX_ANGLE = 460;
-const float DESIRED_RANGE = 7.0;
-const float TOO_CLOSE = 0.75;
-const float MAX_RANGE = 20.0;
 void laserHandler( const sensor_msgs::LaserScan & msg ) {
 
     // if( DEBUGGING )
@@ -207,11 +205,11 @@ void laserHandler( const sensor_msgs::LaserScan & msg ) {
                 );
 
                 // new_theta = ANGULAR_SPEED;
-                // // turn husky to the left or right to avoid obstacle
-                if( n > 360 )
-                    new_theta -= ANGULAR_SPEED;
-                else
+                // turn husky to the left or right to avoid obstacle
+                if( n > 360 || goal_index > 360 )
                     new_theta = ANGULAR_SPEED;
+                else
+                    new_theta -= ANGULAR_SPEED;
 
                 // send twist message to stop and turn away from collision
                 moveHusky( 0, new_theta );
@@ -233,7 +231,7 @@ void laserHandler( const sensor_msgs::LaserScan & msg ) {
     // find a random goal
     if( current_state == COMPLETE ) { 
 
-        int goal_index = 0;
+        // int goal_index = 0;
         if( ranges.size() != 0 ) {
 
             int sample_size = ranges.size();
