@@ -1,0 +1,17 @@
+<launch>
+
+    <node
+        pkg="cse180final"
+        type="randomnav"
+        name="randomnav"
+        respawn="true"
+    />
+
+    <node
+        pkg="cse180final"
+        type="scan_cloud"
+        name="scan_cloud"
+        respawn="true"
+    />
+
+</launch>

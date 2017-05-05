@@ -1,10 +1,4 @@
 // http://wiki.ros.org/laser_pipeline/Tutorials/IntroductionToWorkingWithLaserScannerData
-// scan_cloud.cpp
-// TODO: change topic name
-// sudo apt-get install python-catkin-build-tools
-// occupancy grid utils github
-// at 0.7m 30 is size of post in ranges indices at 20m 1 indeces is the size
-// tmux linux terminal
 #include <ros/ros.h>
 #include <tf/transform_listener.h>
 #include <sensor_msgs/PointCloud.h>
@@ -29,7 +23,6 @@ public:
   tf::TransformListener listener_;
   message_filters::Subscriber<sensor_msgs::LaserScan> laser_sub_;
   tf::MessageFilter<sensor_msgs::LaserScan> laser_notifier_;
-  ros::Publisher scan_pub_;
 
   LaserScanToPointCloud(ros::NodeHandle n) : 
     n_(n),
@@ -39,7 +32,6 @@ public:
     laser_notifier_.registerCallback(
       boost::bind(&LaserScanToPointCloud::scanCallback, this, _1));
     laser_notifier_.setTolerance(ros::Duration(0.01));
-    scan_pub_ = n_.advertise<sensor_msgs::PointCloud>("/my_cloud",1);
   }
 
   void scanCallback (const sensor_msgs::LaserScan::ConstPtr& scan_in)
@@ -63,9 +55,8 @@ public:
     for( unsigned int n = 0; n < posts.size(); n++ )
     {
         postpos.push_back( cloud.points[posts[n]] );
-        // ROS_INFO_STREAM( cloud.points[posts[n]] );
+        ROS_INFO_STREAM( cloud.points[posts[n]] );
 	}
-    scan_pub_.publish(cloud);
 
   }
 };
@@ -82,130 +73,86 @@ int main(int argc, char** argv) {
 
 }
 
-
-const float MAX_RANGE = 4.0;
-const float MIN_RANGE = 0.5;
+// percent error of the laser we used to compare expected
+// radius and calcualted radius of posts we find
+const float ERROR = 0.10;
+// LaserScan angle increment, used in converting from ranges index to angle
+const float INCREM = 0.0065540750511;
+// the radius of a post
+const float POST_RADIUS = 0.07;
+//maximum range of post detection
+const float MAX_RANGE = 5.0;
+// minimum number of scans a posts within 5 meters should have
 const int MIN_WIDTH = 5;
-const int MAX_WIDTH = 30;
+// detects posts in LaserScan:ranges and returns a list
+// of detected posts indexs, the indexs are from ranges
 vector<int> detectPost( const vector<float> ranges ) {
 
-    bool is_post = false;
-    float range = 0;
-    int width = 0;
-    int half_width = 0;
-    float min_range = 0.0;
-    float prior = 0.0;
-    int pindex = 0;
     vector<int> posts;
-    int expected_width;
-    for( unsigned int n = 0; n < 720; n++ ) {
+	vector<float> my_ranges;
+    float prior_range = 0.0;
+	float range = 0.0;
+	float angle = 0.0;
+	float radius_calc = 0.0;
+	for( int n = 0; n < 720; n++ ) {
 
-        range = ranges[n];
+		range = ranges[n];
 
-        if( range < MAX_RANGE && range > MIN_RANGE ) {
+		if( prior_range == 0.0 && range < MAX_RANGE ) {
+			
+			prior_range = range;
+			my_ranges.push_back( range );	
+			continue;
 
-            // switch( (int)range ) {
-            //     case 1:
-            //         expected_width = 21;
-            //     break;
-            //     case 2:
-            //         expected_width = 10;
-            //     break;
-            //     case 3:
-            //         expected_width = 8;
-            //     break;
-            //     case 4:
-            //         expected_width = 6;
-            //     break;
-            // }
+		// } else if( (int)range == (int)prior_range ) {
+        } else if( inError( range, prior_range, 0.06 ) ) {
 
-            // for( unsigned int m = n; m <= n + expected_width; m++ ) {
+			my_ranges.push_back( range );
+			prior_range = range;
 
-            //     // difference between scans is too big to be a post
-            //     if( !inError( range, ranges[n], 0.0168 ) )
-            //         break;
+		} else if( my_ranges.size() > MIN_WIDTH ) {
 
-            //     // if( m - n < MIN_WIDTH )
-            //         // continue; 
+			// calculate angle relative to first scan of post
+			angle = abs( my_ranges.size() * INCREM ) / 2; 
 
-            //     // no post should be longer than this
-            //     // if( m - n > MAX_WIDTH )
-            //     //     break;
-                
-            //     // if( inError( range, ranges[n], 0.0168 ) )
-            //     //     cout << "NEW, post detected! Range: " << ranges[n] << " width: " << m - n << endl;
-            //     if( m == n + expected_width - 1 )
-            //         cout << "NEW, post detected! Range: " << ranges[n] << " width: " << (n + expected_width - 1) - m << endl;
-            // }
-
-
-        }
-
-
-        if( range > MAX_RANGE || range < MIN_RANGE ) {
-
-            // cout << "bad range" << endl;
-            prior = 0.0;
-            min_range = 0.0;
-            width = 0;
-            half_width = 0;	
- 	        pindex = 0;
-            continue;
-
-        } else if( prior > MAX_RANGE || prior < MIN_RANGE ) {
-
-            //cout << "left range: " << range << endl;
-            prior = range;
-            min_range = range;
-            width = 1;
-            half_width = 1;		
- 	        pindex = 0;
-
-        } else if( min_range > range ) {
-
-           // cout << "left range: " << range << endl;
-            min_range = range;
-            width++;
-            half_width = width;
-	        pindex = n;
-
-        } else if( min_range < range ) {
-
-            if( half_width > 0 ) {
-                
-               // cout << "right range: " << range << endl;
-                width++;
-                half_width--;
-
-            } else {
-
-                //cout << "right range: " << range << endl;
-                width++;
-                if( width < MAX_WIDTH && width > MIN_WIDTH ) {
-
-                    // the further away the smaller the width should be
-                    if( ( width > 10 && min_range < 2 ) || ( width < 10 && min_range > 2 ) ) {
-
-                        cout << "post detected, min-range:" << min_range << " width: " << width << endl;
-                        // cout << pindex << endl;
-                        posts.push_back( pindex );
-                
-                    }
-                
-                }
-
-                prior = 0.0;
-                min_range = 0.0;
-                width = 0;
-                half_width = 0;
-		        pindex = 0;
-
+			// calculate radius of the suspected post
+			radius_calc = my_ranges[0] * sinf( angle );
+			
+			// see if this is an actual post by comparing to actual radius
+			if( inError( POST_RADIUS, radius_calc, ERROR ) ) {
+            
+                // add ranges index of this post to posts array
+                // for use in point cloud
+                posts.push_back( n );
+            	// cout << " range: " << my_ranges[0] << " width:" << my_ranges.size() << " angle: " << angle << " radius_calc: " << radius_calc << endl;
+            
             }
+            
+			my_ranges.clear();
+			prior_range = 0.0;
 
-        } 
+		} else {
 
+			my_ranges.clear();
+			prior_range = 0.0;
 
-    }
+		}
+
+	}
+
+    // we are missing a post or found a fraud
+    if( posts.size() == 1 )
+        posts.clear();
+    // if( posts.size() % 2 == 1 ) {
+
+    //     for( int p = 0; p < posts.size(); p += 2 ) {
+
+    //         if( abs( posts[p] - posts[p+1] ) < 70 )
+    //             continue;
+    //         else if( abs)
+    //     }
+
+    // }
 
     return posts;
 }

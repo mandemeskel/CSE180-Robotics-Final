@@ -8,8 +8,6 @@
 #include <nav_msgs/Odometry.h>
 #include <random_numbers/random_numbers.h>
 #include <tf/transform_listener.h>
-// #include <message_filters/subscriber.h>
-// #include <message_filters/time_synchronizer.h>
 #include <vector>
 #include <cmath>
 #include <sstream>
@@ -300,10 +298,6 @@ float getDirection( int index ) {
 // sends a twist message cmd_vel
 void moveHusky( float x, float angular ) {
 
-    // geometry_msgs::Twist msg;
-    // msg.linear.x = x;
-    // msg.angular.z = angular;
-    // twist_pub.publish( msg );
     twist_msg.linear.x = x;
     twist_msg.angular.z = angular;
     publish = true;
