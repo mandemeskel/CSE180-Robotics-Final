@@ -2,12 +2,12 @@
 <package>
   <name>cse180final</name>
   <version>0.0.0</version>
-  <description>The cse180final package</description>
+  <description>The simple package</description>
 
   <!-- One maintainer tag required, multiple allowed, one person per tag --> 
   <!-- Example:  -->
   <!-- <maintainer email="jane.doe@example.com">Jane Doe</maintainer> -->
-  <maintainer email="shamano@todo.todo">shamano</maintainer>
+  <maintainer email="galliumos@todo.todo">galliumos</maintainer>
 
 
   <!-- One license tag required, multiple allowed, one license per tag -->
@@ -19,7 +19,7 @@
   <!-- Url tags are optional, but multiple are allowed, one per tag -->
   <!-- Optional attribute type can be: website, bugtracker, or repository -->
   <!-- Example: -->
-  <!-- <url type="website">http://wiki.ros.org/cse180final</url> -->
+  <!-- <url type="website">http://wiki.ros.org/simple</url> -->
 
 
   <!-- Author tags are optional, multiple are allowed, one per tag -->
@@ -40,29 +40,33 @@
   <!-- Use test_depend for packages you need only for testing: -->
   <!--   <test_depend>gtest</test_depend> -->
   <buildtool_depend>catkin</buildtool_depend>
-
-  <build_depend>eigen_core</build_depend>
-  <run_depend>eigen_core</run_depend>
-
-  <build_depend>cmake_modules</build_depend>
-  <run_depend>cmake_modules</run_depend>
-  
-  <build_depend>roscpp</build_depend>
-  <run_depend>roscpp</run_depend>
-  <build_depend>sensor_msgs</build_depend>
-  <run_depend>sensor_msgs</run_depend>
-  <build_depend>actionlib</build_depend>
-  <run_depend>actionlib</run_depend>
-  <build_depend>move_base_msgs</build_depend>
-  <run_depend>move_base_msgs</run_depend>
   <build_depend>geometry_msgs</build_depend>
-  <run_depend>geometry_msgs</run_depend>
+  <build_depend>message_generation</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>rospy</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>std_msgs</build_depend>
   <build_depend>laser_geometry</build_depend>
-  <run_depend>laser_geometry</run_depend>
   <build_depend>tf</build_depend>
+  <build_depend>tf2</build_depend>
+  <build_depend>tf2_ros</build_depend>
+  <build_depend>map_msgs</build_depend>
+  <build_depend>random_numbers</build_depend>
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>rospy</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>std_msgs</run_depend>
+  <run_depend>laser_geometry</run_depend>
   <run_depend>tf</run_depend>
-  <build_depend>message_filters</build_depend>
-  <run_depend>message_filters</run_depend>
+  <run_depend>tf2</run_depend>
+  <run_depend>tf2_ros</run_depend>
+  <run_depend>map_msgs</run_depend>
+  <run_depend>random_numbers</run_depend>
+
+
   <!-- The export tag contains other, unspecified, tags -->
   <export>
     <!-- Other tools can request additional information be placed here -->

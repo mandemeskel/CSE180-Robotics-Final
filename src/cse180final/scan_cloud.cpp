@@ -17,6 +17,7 @@
 using namespace std;
 
 vector<int> detectPost(  const vector<float> );
+bool inError( float, float, float );
 
 
 class LaserScanToPointCloud{
@@ -62,7 +63,7 @@ public:
     for( unsigned int n = 0; n < posts.size(); n++ )
     {
         postpos.push_back( cloud.points[posts[n]] );
-        ROS_ERROR_STREAM( cloud.points[posts[n]] );
+        ROS_INFO_STREAM( cloud.points[posts[n]] );
 	}
     scan_pub_.publish(cloud);
 
@@ -100,6 +101,24 @@ vector<int> detectPost( const vector<float> ranges ) {
 
         range = ranges[n];
 
+        // if( range < MAX_RANGE && range > MIN_RANGE ) {
+
+        //     for( unsigned int m = n; m < 720; m++ ) {
+
+        //         if( m - n < MIN_WIDTH )
+        //             continue;
+
+        //         if( inError( range, ranges[n], 0.0168 ) )
+        //             cout << "NEW, post detected! Range: " << ranges[n] << " width: " << m - n << endl; 
+
+        //         // no post should be longer than this
+        //         if( m - n > MAX_WIDTH )
+        //             break;
+        //     }
+
+        // }
+
+
         if( range > MAX_RANGE || range < MIN_RANGE ) {
 
             // cout << "bad range" << endl;
@@ -107,7 +126,7 @@ vector<int> detectPost( const vector<float> ranges ) {
             min_range = 0.0;
             width = 0;
             half_width = 0;	
- 	    pindex = 0;
+ 	        pindex = 0;
             continue;
 
         } else if( prior > MAX_RANGE || prior < MIN_RANGE ) {
@@ -117,7 +136,7 @@ vector<int> detectPost( const vector<float> ranges ) {
             min_range = range;
             width = 1;
             half_width = 1;		
- 	    pindex = 0;
+ 	        pindex = 0;
 
         } else if( min_range > range ) {
 
@@ -125,7 +144,7 @@ vector<int> detectPost( const vector<float> ranges ) {
             min_range = range;
             width++;
             half_width = width;
-	    pindex = n;
+	        pindex = n;
 
         } else if( min_range < range ) {
 
@@ -143,11 +162,12 @@ vector<int> detectPost( const vector<float> ranges ) {
 
                     // the further away the smaller the width should be
                     if( ( width > 10 && min_range < 2 ) || ( width < 10 && min_range > 2 ) ) {
-		                cout << "post detected, min-range:" << min_range << " width: " << width << endl;
-				cout << pindex << endl;
-				posts.push_back( pindex );
-			
-			}
+
+                        cout << "post detected, min-range:" << min_range << " width: " << width << endl;
+                        cout << pindex << endl;
+                        posts.push_back( pindex );
+                
+                    }
                 
                 }
 
@@ -155,7 +175,7 @@ vector<int> detectPost( const vector<float> ranges ) {
                 min_range = 0.0;
                 width = 0;
                 half_width = 0;
-		pindex = 0;
+		        pindex = 0;
 
             }
 
@@ -165,4 +185,14 @@ vector<int> detectPost( const vector<float> ranges ) {
     }
 
     return posts;
+}
+
+
+bool inError( float x, float y, float error ) {
+    
+    float min = x - (x * error);
+    float max = x + (x * error);
+
+    return y > min && y < max;
+
 }

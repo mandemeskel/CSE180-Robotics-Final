@@ -1,5 +1,5 @@
 #include <ros/ros.h>
-#include <tf2_ros/transform_listener.h>
+#include <tf/transform_listener.h>
 #include <laser_geometry/laser_geometry.h>
 #include <geometry_msgs/Point32.h>
 #include <vector>
@@ -16,7 +16,7 @@ class My_Filter {
     private:
         ros::NodeHandle node_;
         laser_geometry::LaserProjection projector_;
-        tf2::TransformListener tfListener_;
+        tf::TransformListener tfListener_;
 
         ros::Publisher point_cloud_publisher_;
         ros::Subscriber scan_sub_;
@@ -25,8 +25,8 @@ class My_Filter {
 
 My_Filter::My_Filter() {
     
-    scan_sub_ = node_.subscribe<sensor_msgs::LaserScan> ("/scan", 100, &My_Filter::scanCallback, this);
-    point_cloud_publisher_ = node_.advertise<sensor_msgs::PointCloud2> ("/cloud", 100, false);
+    scan_sub_ = node_.subscribe<sensor_msgs::LaserScan> ("scan", 100, &My_Filter::scanCallback, this);
+    point_cloud_publisher_ = node_.advertise<sensor_msgs::PointCloud2> ("cloud", 100, false);
     tfListener_.setExtrapolationLimit(ros::Duration(0.1));
 
 }
