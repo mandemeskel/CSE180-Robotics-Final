@@ -217,3 +217,11 @@ target_link_libraries(scan_cloud
 
 ## Add folders to be run by python nosetests
 # catkin_add_nosetests(test)
+
+#add_executable(navigatepoints navigatepoints.cpp)
+#target_link_libraries(navigatepoints ${catkin_LIBRARIES})
+
+add_executable(randomnav randomnav.cpp)
+target_link_libraries(randomnav ${catkin_LIBRARIES})
+
+
