@@ -63,7 +63,7 @@ public:
     for( unsigned int n = 0; n < posts.size(); n++ )
     {
         postpos.push_back( cloud.points[posts[n]] );
-        ROS_INFO_STREAM( cloud.points[posts[n]] );
+        // ROS_INFO_STREAM( cloud.points[posts[n]] );
 	}
     scan_pub_.publish(cloud);
 
@@ -97,26 +97,49 @@ vector<int> detectPost( const vector<float> ranges ) {
     float prior = 0.0;
     int pindex = 0;
     vector<int> posts;
+    int expected_width;
     for( unsigned int n = 0; n < 720; n++ ) {
 
         range = ranges[n];
 
-        // if( range < MAX_RANGE && range > MIN_RANGE ) {
+        if( range < MAX_RANGE && range > MIN_RANGE ) {
 
-        //     for( unsigned int m = n; m < 720; m++ ) {
+            // switch( (int)range ) {
+            //     case 1:
+            //         expected_width = 21;
+            //     break;
+            //     case 2:
+            //         expected_width = 10;
+            //     break;
+            //     case 3:
+            //         expected_width = 8;
+            //     break;
+            //     case 4:
+            //         expected_width = 6;
+            //     break;
+            // }
 
-        //         if( m - n < MIN_WIDTH )
-        //             continue;
+            // for( unsigned int m = n; m <= n + expected_width; m++ ) {
 
-        //         if( inError( range, ranges[n], 0.0168 ) )
-        //             cout << "NEW, post detected! Range: " << ranges[n] << " width: " << m - n << endl; 
+            //     // difference between scans is too big to be a post
+            //     if( !inError( range, ranges[n], 0.0168 ) )
+            //         break;
 
-        //         // no post should be longer than this
-        //         if( m - n > MAX_WIDTH )
-        //             break;
-        //     }
+            //     // if( m - n < MIN_WIDTH )
+            //         // continue; 
 
-        // }
+            //     // no post should be longer than this
+            //     // if( m - n > MAX_WIDTH )
+            //     //     break;
+                
+            //     // if( inError( range, ranges[n], 0.0168 ) )
+            //     //     cout << "NEW, post detected! Range: " << ranges[n] << " width: " << m - n << endl;
+            //     if( m == n + expected_width - 1 )
+            //         cout << "NEW, post detected! Range: " << ranges[n] << " width: " << (n + expected_width - 1) - m << endl;
+            // }
+
+
+        }
 
 
         if( range > MAX_RANGE || range < MIN_RANGE ) {
@@ -164,7 +187,7 @@ vector<int> detectPost( const vector<float> ranges ) {
                     if( ( width > 10 && min_range < 2 ) || ( width < 10 && min_range > 2 ) ) {
 
                         cout << "post detected, min-range:" << min_range << " width: " << width << endl;
-                        cout << pindex << endl;
+                        // cout << pindex << endl;
                         posts.push_back( pindex );
                 
                     }
